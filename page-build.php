@@ -4,7 +4,7 @@
 
 		<section>
 
-			<section class="flky">
+			<section class="slider">
 				<?php
 					$args = array(
 				    'post_type'				=> 'build',
@@ -15,24 +15,26 @@
 					$the_query = new WP_Query( $args );
 				?>
 				<?php $count=0; ?>
-				<?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
-					<figure class="project" data-index="<?php echo $count++; ?>">
-						<a href="<?php the_permalink(); ?>">
-							<picture>
-								<?php $image = get_field( "home_feature_slider_image" ); ?>
-								<source media="(min-width: 2000px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'x-large' )[0]; ?>">
-							  <source media="(min-width: 1600px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'large' )[0]; ?>">
-								<source media="(min-width: 600px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'medium' )[0]; ?>">
-							  <img src="<?php echo wp_get_attachment_image_src( $image, 'thumb_square' )[0]; ?>">
-							</picture>
-							<div class="title">
-								<div class="text">
-									<?php the_title(); ?>
+				<div class="slider-viewport animate">
+					<?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
+						<figure class="project" data-index="<?php echo $count++; ?>">
+							<a href="<?php the_permalink(); ?>">
+								<picture>
+									<?php $image = get_field( "home_feature_slider_image" ); ?>
+									<source media="(min-width: 2000px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'x-large' )[0]; ?>">
+								  <source media="(min-width: 1600px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'large' )[0]; ?>">
+									<source media="(min-width: 600px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'medium' )[0]; ?>">
+								  <img src="<?php echo wp_get_attachment_image_src( $image, 'thumb_square' )[0]; ?>">
+								</picture>
+								<div class="title">
+									<div class="text">
+										<?php the_title(); ?>
+									</div>
 								</div>
-							</div>
-						</a>
-					</figure>
-				<?php endwhile; ?>
+							</a>
+						</figure>
+					<?php endwhile; ?>
+				</div>
 				<?php wp_reset_query(); ?>
 			</section>
 
@@ -45,8 +47,8 @@
 				<ul>
 			</section>
 
-			<section class="iso-wrap">
-				<div class="iso">
+			<section class="grid-wrap">
+				<div class="grid">
 					<?php
 						$args = array(
 							'post_type'				=> 'build',
@@ -57,7 +59,7 @@
 					<?php $count = 0; ?>
 					<?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
 						<?php $categories = get_the_category(); ?>
-						<div class="iso-cell <?php echo esc_html( $categories[0]->name ); ?>" data-category="<?php echo esc_html( $categories[0]->name ); ?>">
+						<div class="grid-item <?php echo esc_html( $categories[0]->name ); ?>" data-category="<?php echo esc_html( $categories[0]->name ); ?>">
 							<?php if($count % 3 == 0): ?>
 								<?php $image = get_field('home_grid_landscape'); ?>
 									<figure>
@@ -92,6 +94,11 @@
 										</a>
 									</figure>
 								<?php endif; ?>
+								<div class="title">
+									<div class="text">
+										<?php the_title(); ?>
+									</div>
+								</div>
 							</div>
 						<?php $count++; ?>
 					<?php endwhile; ?>
@@ -109,90 +116,19 @@
 
 			$(function () {
 
-				var $scrollTop, $flky, $iso;
+				var $scrollTop;
 
 				$(window).load(function() {
 					init();
 				});
 
-				var requestAnimationFrame = (function(){
-				 return  window.requestAnimationFrame       ||
-								 window.webkitRequestAnimationFrame ||
-								 window.mozRequestAnimationFrame    ||
-								 window.oRequestAnimationFrame      ||
-								 window.msRequestAnimationFrame     ||
-								 function(callback, element){
-										 window.setTimeout(callback, 1000 / 60);
-								 };
-				 })();
-
 			 var init = function(time) {
-					 $flky = new Flickity( '.flky', {
-		 			  accessibility: true,
-		 			  adaptiveHeight: false,
-		 			  autoPlay: false,
-		 			  cellAlign: 'left',
-		 			  cellSelector: undefined,
-		 			  contain: false,
-		 			  draggable: false,
-		 			  dragThreshold: 3,
-		 			  freeScroll: false,
-						selectedAttraction: 0.12,
-		 			  friction: 1,
-		 			  groupCells: false,
-		 			  initialIndex: 0,
-		 			  lazyLoad: false,
-		 			  percentPosition: true,
-		 			  prevNextButtons: false,
-		 			  pageDots: false,
-		 			  resize: true,
-		 			  rightToLeft: false,
-		 			  setGallerySize: false,
-		 			  watchCSS: false,
-		 			  wrapAround: true
-		 			});
 
-					$(".project").removeClass("left");
-					$(".project").removeClass("right");
-
-					if(($flky.selectedIndex-1) < 0){
-						$(".project").eq($flky.slides.length-1).addClass("left");
-					} else {
-						$(".project").eq($flky.selectedIndex-1).addClass("left");
-					}
-					if(($flky.selectedIndex+1) > ($flky.slides.length-1)) {
-						$(".project").eq(0).addClass("right");
-					} else {
-						$(".project").eq($flky.selectedIndex+1).addClass("right");
-					}
-
-					$(".project a").on("click", function (ev) {
-						if(!$(this).closest(".project").hasClass("is-selected")){
-							ev.preventDefault();
-							var index = $(this).closest("figure").data("index");
-							$flky.select(index);
-						} else {
-							ev.preventDefault();
-							$("body").removeClass("show");
-							window.location.href = $(this).attr("href");
-						}
-					});
-
-		 			$iso = $('.iso').isotope({
-		 			  itemSelector: '.iso-cell',
-		 				percentPosition: true,
-		 				masonry: {
-		 			    columnWidth: '.iso-cell'
-		 			  }
-		 			});
-
-		 			$iso.imagesLoaded().progress( function() {
-		 			  $iso.isotope('layout');
-		 			});
+				 initSlider();
 
 					$('.filter button').on( 'click', function() {
 						var filterValue = $(this).attr('data-filter');
-						$iso.isotope({ filter: filterValue });
+						// $iso.isotope({ filter: filterValue });
 						$(".current").removeClass("current");
 						$(this).addClass("current");
 					});
@@ -211,6 +147,60 @@
 					}
 				}
 
+				function initSlider() {
+
+					// Set initial selected
+					$(".project").eq(0).addClass("is-selected");
+					$(".project").eq(3).addClass("hide");
+					$(".project").eq(4).addClass("hide");
+
+					$('.grid').masonry({
+					  itemSelector: '.grid-item',
+					  percentPosition: true,
+					});
+
+					// Set click event
+					$(document).on("click", ".project a", function (ev) {
+						var proj = $(this).closest(".project");
+						if(!$(proj).hasClass("is-selected")){
+							ev.preventDefault();
+							sliderSelect();
+						}
+					});
+
+				}
+
+				function sliderSelect() {
+
+					var deltaX = $(".project").innerWidth();
+
+					$(".slider-viewport").append($(".project").eq(0).clone().addClass("hide"));
+					$(".is-selected").removeClass("is-selected");
+					$(".slider-viewport").css("transform", "translate3d(-"+deltaX+"px, 0, 0)");
+
+					setTimeout(function(){
+						$(".slider-viewport").removeClass("animate");
+						$(".slider-viewport").css("transform", "translate3d(0, 0, 0)");
+						$(".project").eq(0).remove();
+						setTimeout(function(){
+							$(".slider-viewport").addClass("animate");
+							$(".project").eq(0).addClass("is-selected");
+							$(".project").eq(2).removeClass("hide");
+						}, 10);
+					}, 880);
+
+				}
+
+				var requestAnimationFrame = (function(){
+				 return  window.requestAnimationFrame       ||
+								 window.webkitRequestAnimationFrame ||
+								 window.mozRequestAnimationFrame    ||
+								 window.oRequestAnimationFrame      ||
+								 window.msRequestAnimationFrame     ||
+								 function(callback, element){
+										 window.setTimeout(callback, 1000 / 60);
+								 };
+				 })();
 			});
 
 		})(jQuery, this);

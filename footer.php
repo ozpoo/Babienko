@@ -1,11 +1,4 @@
-			<!-- footer -->
-			<footer class="footer" role="contentinfo">
-
-			</footer>
-			<!-- /footer -->
-
-		</div>
-		<!-- /wrapper -->
+			<footer class="footer"></footer>
 
 		<?php wp_footer(); ?>
 

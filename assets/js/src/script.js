@@ -5,25 +5,39 @@
 		'use strict';
 
 		$(document).ready(function(){
-			$(".home main, .roster main, .connect main, .connect .left").css("margin-top", $(".header").innerHeight());
 
-			$(".title-fade, .intro").css("height", $(window).height());
+		});
+
+		$(window).load(function(){
+
+			init();
+
+		});
+
+		$(window).resize(function(){
+			size();
+		});
+
+		function init() {
+
+			// stickybits(".header");
+
+			$("body").addClass("ready");
+			size();
+
+			setTimeout(function(){
+				$(".title-fade").removeClass("show");
+			}, 1880);
 
 			$(".menu-toggle button").on("click", function() {
 				$(".menu").toggleClass("show");
 			});
-		});
+		}
 
-		$(window).load(function(){
-			$("body").addClass("ready");
-			setTimeout(function(){
-				$(".title-fade").removeClass("show");
-			}, 1200);
-		});
-
-		$(window).resize(function(){
-			$(".home main, .roster main, .connect main, .connect .left").css("margin-top", $(".header").innerHeight());
-		});
+		function size() {
+			$(".home main, .roster main, .connect main, .connect .left").css("margin-top", $(".logo").innerHeight());
+			$(".title-fade, .intro").css("height", $(window).height());
+		}
 
 	});
 

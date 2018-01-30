@@ -76,6 +76,7 @@ $red: rgba(245,51,63,1);
 $black: #191919;
 $unit-1: calc(5px + .4vw + .4vh);
 $unit-2: calc(10px + .8vw + .8vh);
+$unit-3: calc(15px + 1.2vw + 1.2vh);
 $unit-4: calc(20px + 1.6vw + 1.6vh);
 
 * {
@@ -113,6 +114,13 @@ body {
 
     header, main {
       opacity: 1;
+    }
+
+    .title-fade {
+
+      .text {
+        opacity: 1;
+      }
     }
   }
 }
@@ -191,17 +199,6 @@ button {
 }
 
 .header {
-  display: flex;
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  flex-wrap: wrap;
-  width: 100vw;
-  padding: $unit-1;
-  backface-visibility: hidden;
-  transition: 660ms transform cubic-bezier(.165, .84, .44, 1);
-  will-change: transform;
-  z-index: 100;
 
   &.white {
 
@@ -232,10 +229,18 @@ button {
   }
 
   .logo {
-    flex: 1;
-    text-align: left;
+    position: fixed;
+    top: $unit-3;
+    left: $unit-3;
+    z-index: 100;
 
     a {
+      display: block;
+
+      svg {
+        display: block;
+      }
+
       &:hover {
         .st0 {
           fill: $black;
@@ -250,8 +255,10 @@ button {
   }
 
   .menu-toggle {
-    flex: 1;
-    text-align: right;
+    position: fixed;
+    top: $unit-3;
+    right: $unit-3;
+    z-index: 100;
 
     button {
       position: relative;
@@ -264,7 +271,7 @@ button {
         top: 0px;
         left: 0px;
         width: 100%;
-        height: 1px;
+        height: 2px;
         backface-visibility: hidden;
         background: $red;
         transition: 440ms background cubic-bezier(.165, .84, .44, 1);
@@ -277,7 +284,7 @@ button {
         top: 50%;
         left: 0px;
         width: 100%;
-        height: 1px;
+        height: 2px;
         transform: translate3d(0,-50%,0);
         backface-visibility: hidden;
         background: $red;
@@ -291,7 +298,7 @@ button {
         bottom: 0px;
         left: 0px;
         width: 100%;
-        height: 1px;
+        height: 2px;
         backface-visibility: hidden;
         background: $red;
         transition: 440ms background cubic-bezier(.165, .84, .44, 1);
@@ -358,16 +365,14 @@ button {
 
   .logo {
     position: absolute;
-    top: 0px;
-    left: 0px;
-    padding: $unit-1;
+    top: $unit-3;
+    left: $unit-3;
   }
 
   .menu-toggle {
     position: absolute;
-    top: 0px;
-    right: 0px;
-    padding: $unit-1;
+    top: $unit-3;
+    right: $unit-3;
 
     button {
       position: relative;
@@ -418,8 +423,14 @@ button {
   pointer-events: none;
   transition: 880ms opacity cubic-bezier(.165, .84, .44, 1);
   will-change: opacity;
-
   z-index: 1001;
+
+  .text {
+    backface-visibility: hidden;
+    opacity: 0;
+    transition: 880ms opacity cubic-bezier(.165, .84, .44, 1);
+    will-change: opacity;
+  }
 
   &.show {
     opacity: 1;
@@ -427,107 +438,126 @@ button {
   }
 }
 
-.flky {
+.slider {
+  position: relative;
   width: 100vw;
   height: 70vh;
   min-height: 420px;
   overflow: hidden;
-  outline: none;
 
-  .flickity-viewport {
-    width: 100%;
-    height: 100%;
-  }
-
-  .flickity-slider {
-    height: 100%;
-  }
-
-  .title {
-    display: none;
+  .slider-viewport {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate3d(-50%, -50%, 0);
-
-    .text {
-      color: white;
-      font-size: 3.6em;
-      font-weight: 100;
-    }
-  }
-
-  figure {
-    width: 87.5%;
+    top: 0px;
+    left: 0px;
+    width: 525vw;
     height: 100%;
-    padding-left: $unit-2;
+    backface-visibility: hidden;
+    white-space: nowrap;
+    will-change: transform;
 
-    a {
+    &.animate {
+      transition: 880ms transform cubic-bezier(.165, .84, .44, 1);
+    }
+
+    .title {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate3d(-50%, -50%, 0);
+
+      .text {
+        color: white;
+        font-size: 3.6em;
+        font-weight: 100;
+      }
+    }
+
+    figure {
       display: block;
-      position: relative;
-      width: 100%;
+      width: 80vw;
+      width: calc(80vw + 5px + .4vw + .4vh);
       height: 100%;
-      overflow: hidden;
+      padding-right: $unit-2;
+      float: left;
 
-      &:after {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 140vw;
-        padding-bottom: 140vw;
-        transform: translate(-50%,-50%);
-        border-radius: 50%;
-        box-shadow: inset 0px 0px 60vw 25vw rgba(0,0,0,0.1);
-        content: '';
+      a {
+        display: block;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+
+        &:hover {
+          img {
+            // transform: scale(1.01);
+            filter: grayscale(0%) brightness(.95);
+          }
+        }
+
+        &:after {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 140vw;
+          padding-bottom: 140vw;
+          transform: translate(-50%,-50%);
+          border-radius: 50%;
+          box-shadow: inset 0px 0px 2000vw 30vw rgba(0,0,0,0.06);
+          content: '';
+        }
+
+        img {
+          backface-visibility: hidden;
+          filter: grayscale(100%) brightness(.95);
+          transition: 660ms filter cubic-bezier(.165, .84, .44, 1), 1200ms transform cubic-bezier(.165, .84, .44, 1);
+          will-change: filter, transform;
+        }
       }
 
       img {
-        // backface-visibility: hidden;
-        filter: grayscale(100%) brightness(.95);
-        transition: 660ms filter cubic-bezier(.165, .84, .44, 1), 1200ms transform cubic-bezier(.165, .84, .44, 1);
-        will-change: filter, transform;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
       }
-    }
 
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-    }
+      &.hide {
 
-    &:hover {
-      a {
         img {
-          transform: scale(1.01);
-          filter: grayscale(0%) brightness(.95);
+          display: none;
         }
       }
     }
   }
 }
 
-.iso-wrap {
+.grid-wrap {
   padding: $unit-1;
-  padding-right: 12.5vw;
-  padding-left: 25vw;
+  padding-right: 20vw;
+  padding-left: 20vw;
 }
 
 .sub-menu {
   position: fixed;
-  bottom: 0px;
-  left: 0px;
-  padding: $unit-1;
+  bottom: $unit-3;
+  left: $unit-3;
   transform: translate3d(-50%, 0, 0);
   line-height: 1.6;
   opacity: 0;
+  pointer-events: none;
   transition: 660ms opacity cubic-bezier(.165, .84, .44, 1), 660ms transform cubic-bezier(.165, .84, .44, 1);
   will-change: opacity, transform;
   z-index: 100;
 
+  ul {
+    margin: 0px;
+  }
+
   &.show {
     transform: translate3d(0,0,0);
     opacity: 1;
+    pointer-events: all;
   }
 
   button, a  {
@@ -543,35 +573,35 @@ button {
   }
 }
 
-.iso {
+.grid {
   display: flex;
   flex-wrap: wrap;
 
-  .iso-cell {
+  .grid-item {
     width: 50%;
-  }
 
-  .iso-cell figure {
-    padding: $unit-1;
-  }
-
-  .iso-cell figure a {
-    display: block;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-
-    img {
-      backface-visibility: hidden;
-      filter: grayscale(100%) brightness(.95);
-      transition: 660ms filter cubic-bezier(.165, .84, .44, 1), 1200ms transform cubic-bezier(.165, .84, .44, 1);
-      will-change: filter, transform;
+    figure {
+      padding: $unit-1;
     }
 
-    &:hover {
+    figure a {
+      display: block;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+
       img {
-        transform: scale(1.02);
-        filter: grayscale(0%) brightness(.95);
+        backface-visibility: hidden;
+        filter: grayscale(100%) brightness(.95);
+        transition: 660ms filter cubic-bezier(.165, .84, .44, 1), 1200ms transform cubic-bezier(.165, .84, .44, 1);
+        will-change: filter, transform;
+      }
+
+      &:hover {
+        img {
+          // transform: scale(1.02);
+          filter: grayscale(0%) brightness(.95);
+        }
       }
     }
   }
@@ -668,15 +698,16 @@ button {
   }
 
   .project-grid {
-    padding: $unit-1;
+    padding: $unit-2;
     padding-right: 20vw;
     padding-left: 20vw;
 
     img {
+      width: 100%;
       max-height: 100vh;
-      padding: $unit-1;
+      padding: $unit-2;
       object-fit: contain;
-      object-position: left;
+      object-position: center;
       filter: brightness(.95);
     }
   }
@@ -732,6 +763,7 @@ button {
   }
 
   .header {
+
     .menu-toggle {
 
       button {
@@ -915,13 +947,13 @@ button {
     }
   }
 
-  .iso-wrap {
+  .grid-wrap {
     padding: $unit-1;
   }
 
-  .iso {
+  .grid {
 
-    .iso-cell {
+    .grid-item {
       width: 100%;
     }
   }
@@ -930,7 +962,7 @@ button {
     font-size: 2.6em;
   }
 
-  .flky {
+  .slider {
     display: none;
   }
 

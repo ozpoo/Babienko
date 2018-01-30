@@ -15,7 +15,6 @@
 								<section class="header white">
 
 									<div class="logo">
-										<p>
 											<a href="<?php echo site_url( '/', 'http' ); ?>">
 												<svg version="1.1"
 													 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
@@ -51,17 +50,14 @@
 														c0.9-0.5,1.6-1.2,2.1-2.2c0.5-0.9,0.8-1.9,0.8-3c0-1.7-0.6-3.1-1.7-4.3S125.2,7.6,123.7,7.6z"/>
 												</svg>
 											</a>
-										</p>
 									</div>
 
 									<div class="menu-toggle">
-										<p>
 											<button>
 												<span class="one"></span>
 												<span class="two"></span>
 												<span class="three"></span>
 											</button>
-										</p>
 									</div>
 
 								</section>
