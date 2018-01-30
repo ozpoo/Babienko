@@ -97,16 +97,39 @@
 
 				<section class="sub-menu">
 					<ul>
-						<li class="description-toggle"><button>About</button></li>
-					</ul>
-					<ul>
-						<li><a href="<?php echo $nextPost; ?>">Next Project</a></li>
-						<li><a href="<?php echo $prevPost; ?>">Previous Project</a></li>
-					</ul>
-					<ul>
-						<li class="share-toggle"><button>Share</button></li>
+						<li class="description-toggle"><button><i class="fa fa-question" aria-hidden="true"></i> Project Description</button></li>
+						<li class="share-toggle"><button><i class="fa fa-share-square-o" aria-hidden="true"></i> Share Project</button></li>
+						<li><a href="<?php echo $nextPost; ?>"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> Next Project</a></li>
+						<li><a href="<?php echo $prevPost; ?>"><i class="fa fa-long-arrow-left" aria-hidden="true"></i> Previous Project</a></li>
 					</ul>
 				</section>
+
+				<!-- <section class="sub-menu-left">
+					<a href="<?php echo $prevPost; ?>">
+						<svg version="1.1"
+							 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+							 x="0px" y="0px" width="17.1px" height="31.4px" viewBox="0 0 17.1 31.4" style="enable-background:new 0 0 17.1 31.4;"
+							 xml:space="preserve">
+							<polyline class="st3" points="16.4,30.7 1.4,15.7 16.4,0.7 "/>
+						</svg>
+					</a>
+				</section>
+
+				<section class="sub-menu-middle">
+					<span class="description-toggle"><button>About</button></span>
+					<span class="share-toggle"><button>Share</button></span>
+				</section>
+
+				<section class="sub-menu-right">
+					<a href="<?php echo $nextPost; ?>">
+						<svg version="1.1"
+							 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+							 x="0px" y="0px" width="17.1px" height="31.4px" viewBox="0 0 17.1 31.4" style="enable-background:new 0 0 17.1 31.4;"
+							 xml:space="preserve">
+							<polyline class="st3" points="0.7,0.7 15.7,15.7 0.7,30.7 "/>
+						</svg>
+					</a>
+				</section> -->
 
 				<section class="project-grid">
 					<?php $images = get_field('single_project_grid'); ?>
@@ -175,10 +198,10 @@
 					$scrollTop = $(document).scrollTop();
 
 					if($scrollTop > $(window).height()*.5) {
-						$(".sub-menu").addClass("show");
+						$(".sub-menu, .sub-menu-left, .sub-menu-middle, .sub-menu-right").addClass("show");
 
 					} else {
-						$(".sub-menu").removeClass("show");
+						$(".sub-menu, .sub-menu-left, .sub-menu-middle, .sub-menu-right").removeClass("show");
 					}
 				}
 

@@ -40,10 +40,10 @@
 
 			<section class="sub-menu">
 				<ul class="filter">
-					<li class="all"><button class="current" data-filter="*">All</button></li>
-					<li class="residence"><button data-filter=".Residence">Residence</button></li>
-					<li class="non-residence"><button data-filter=".Non-Residence">Non-Residence</button></li>
-					<li class="in-progress"><button data-filter=".In-Progress">In-Progress</button></li>
+					<li class="all"><button class="current" data-filter="*"><i class="fa fa-dot-circle-o" aria-hidden="true"></i> All</button></li>
+					<li class="residence"><button data-filter=".Residence"><i class="fa fa-circle-o" aria-hidden="true"></i> Residence</button></li>
+					<li class="non-residence"><button data-filter=".Non-Residence"><i class="fa fa-circle-o" aria-hidden="true"></i> Non-Residence</button></li>
+					<li class="in-progress"><button data-filter=".In-Progress"><i class="fa fa-circle-o" aria-hidden="true"></i> In-Progress</button></li>
 				<ul>
 			</section>
 

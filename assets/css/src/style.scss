@@ -44,6 +44,10 @@
   }
 }
 
+strong, b {
+  font-weight: 300;
+}
+
 @include meyer-reset;
 
 @mixin button-reset {
@@ -194,6 +198,13 @@ button {
   fill: $black;
 }
 
+.st3 {
+  fill:none;
+  stroke:$red;
+  stroke-width:1.2;
+  stroke-miterlimit:10;
+}
+
 .set-back {
   opacity: .3
 }
@@ -261,9 +272,9 @@ button {
     z-index: 100;
 
     button {
-      position: relative;
-      width: 30px;
-      height: 20px;
+      // position: relative;
+      // width: 30px;
+      // height: 20px;
 
       .one {
         display: block;
@@ -352,8 +363,8 @@ button {
       border-bottom: 1px solid transparent;
       backface-visibility: hidden;
       color: $red;
-      font-size: 3em;
-      font-weight: 100;
+      font-size: 2.4em;
+      font-weight: 200;
       transition: 440ms border-bottom cubic-bezier(.165, .84, .44, 1);
       will-change: border-bottom;
 
@@ -560,15 +571,173 @@ button {
     pointer-events: all;
   }
 
-  button, a  {
+  button, a {
+    display: inline-block;
+    margin-top: $unit-1;
+    padding-bottom: 2px;
+    border-bottom: 1px solid transparent;
+    backface-visibility: hidden;
+    color: $red;
+    font-size: .8em;
+    line-height: 1;
+    transition: 440ms border-bottom cubic-bezier(.165, .84, .44, 1);
+    will-change: border-bottom;
+
+    i {
+      width: 26px;
+      backface-visibility: hidden;
+      transition: 220ms margin-right cubic-bezier(.165, .84, .44, 1);
+      will-change: margin-right;
+    }
+
+    &.current {
+
+    }
+
+    &:hover {
+
+      i {
+        margin-right: 6px;
+      }
+    }
+  }
+}
+
+.sub-menu-left {
+  position: fixed;
+  bottom: $unit-3;
+  left: $unit-3;
+  transform: translate3d(-50%, 0, 0);
+  line-height: 1.6;
+  opacity: 0;
+  pointer-events: none;
+  transition: 660ms opacity cubic-bezier(.165, .84, .44, 1), 660ms transform cubic-bezier(.165, .84, .44, 1);
+  will-change: opacity, transform;
+  z-index: 100;
+
+  ul {
+    margin: 0px;
+  }
+
+  &.show {
+    transform: translate3d(0,0,0);
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  button {
+    display: inline-block;
     padding-bottom: 2px;
     border-bottom: 1px solid transparent;
     color: $red;
+    line-height: 1;
     transition: 440ms border-bottom cubic-bezier(.165, .84, .44, 1);
     will-change: border-bottom;
 
     &.current, &:hover {
       border-bottom: 1px solid $red;
+    }
+  }
+
+  a {
+    display: block;
+
+    svg {
+
+      display: block;
+    }
+  }
+}
+
+.sub-menu-middle {
+  position: fixed;
+  bottom: $unit-3;
+  left: 50%;
+  transform: translate3d(-50%, 50%, 0);
+  line-height: 1.6;
+  opacity: 0;
+  pointer-events: none;
+  transition: 660ms opacity cubic-bezier(.165, .84, .44, 1), 660ms transform cubic-bezier(.165, .84, .44, 1);
+  will-change: opacity, transform;
+  z-index: 100;
+
+  ul {
+    margin: 0px;
+  }
+
+  &.show {
+    transform: translate3d(-50%,0,0);
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  button {
+    display: inline-block;
+    margin: 0 $unit-1;
+    padding-bottom: 2px;
+    border-bottom: 1px solid transparent;
+    color: $red;
+    line-height: 1;
+    transition: 440ms border-bottom cubic-bezier(.165, .84, .44, 1);
+    will-change: border-bottom;
+
+    &.current, &:hover {
+      border-bottom: 1px solid $red;
+    }
+  }
+
+  a {
+    display: block;
+
+    svg {
+
+      display: block;
+    }
+  }
+}
+
+.sub-menu-right {
+  position: fixed;
+  right: $unit-3;
+  bottom: $unit-3;
+  transform: translate3d(50%, 0, 0);
+  line-height: 1.6;
+  opacity: 0;
+  pointer-events: none;
+  transition: 660ms opacity cubic-bezier(.165, .84, .44, 1), 660ms transform cubic-bezier(.165, .84, .44, 1);
+  will-change: opacity, transform;
+  z-index: 100;
+
+  ul {
+    margin: 0px;
+  }
+
+  &.show {
+    transform: translate3d(0,0,0);
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  button {
+    display: inline-block;
+    padding-bottom: 2px;
+    border-bottom: 1px solid transparent;
+    color: $red;
+    line-height: 1;
+    transition: 440ms border-bottom cubic-bezier(.165, .84, .44, 1);
+    will-change: border-bottom;
+
+    &.current, &:hover {
+      border-bottom: 1px solid $red;
+    }
+  }
+
+  a {
+    display: block;
+
+    svg {
+
+      display: block;
     }
   }
 }

@@ -68,6 +68,11 @@ function styles() {
       array(), '1.0', 'all');
     wp_enqueue_style('font');
 
+    wp_register_style('fontawesome',
+      get_template_directory_uri() . '/assets/font/font-awesome-4.7.0/css/font-awesome.min.css',
+      array(), '1.0', 'all');
+    wp_enqueue_style('fontawesome');
+
     wp_register_style('style',
       get_template_directory_uri() . '/assets/css/build/build.css?v='.time(),
       array(), '1.0', 'all');
