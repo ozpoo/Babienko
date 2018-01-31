@@ -42,9 +42,14 @@ function header_scripts() {
         wp_enqueue_script('modernizr');
 
         wp_register_script('masonry',
-          get_template_directory_uri() . '/assets/js/_lib/masonry.pkgd.min.js',
+          get_template_directory_uri() . '/assets/js/_lib/masonry-master/dist/masonry.pkgd.min.js',
           array('jquery'), '1.0.0');
         wp_enqueue_script('masonry');
+
+        wp_register_script('multiple-filter-masonry',
+          get_template_directory_uri() . '/assets/js/_lib/masonry-filter/masonry-filter.js',
+          array('jquery'), '1.0.0');
+        wp_enqueue_script('multiple-filter-masonry');
 
         wp_register_script('stickybits',
           get_template_directory_uri() . '/assets/js/_lib/stickybits/dist/stickybits.min.js',

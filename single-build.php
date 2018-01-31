@@ -54,9 +54,15 @@
 
 									<div class="menu-toggle">
 											<button>
-												<span class="one"></span>
-												<span class="two"></span>
-												<span class="three"></span>
+												<svg version="1.1"
+													 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+													 x="0px" y="0px" width="35px" height="19.3px" viewBox="0 0 35 19.3" style="enable-background:new 0 0 35 19.3;"
+													 xml:space="preserve">
+
+												<line class="st3" x1="0" y1="1" x2="35" y2="1"/>
+												<line class="st3" x1="0" y1="9.7" x2="35" y2="9.7"/>
+												<line class="st3" x1="0" y1="18.3" x2="35" y2="18.3"/>
+												</svg>
 											</button>
 									</div>
 
@@ -95,41 +101,19 @@
 					}
 				?>
 
-				<section class="sub-menu">
+				<section class="sub-menu-left">
 					<ul>
 						<li class="description-toggle"><button><i class="fa fa-question" aria-hidden="true"></i> Project Description</button></li>
-						<li class="share-toggle"><button><i class="fa fa-share-square-o" aria-hidden="true"></i> Share Project</button></li>
-						<li><a href="<?php echo $nextPost; ?>"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> Next Project</a></li>
-						<li><a href="<?php echo $prevPost; ?>"><i class="fa fa-long-arrow-left" aria-hidden="true"></i> Previous Project</a></li>
+						<li class="share-toggle"><button><i class="fa fa-share" aria-hidden="true"></i> Share Project</button></li>
 					</ul>
 				</section>
 
-				<!-- <section class="sub-menu-left">
-					<a href="<?php echo $prevPost; ?>">
-						<svg version="1.1"
-							 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
-							 x="0px" y="0px" width="17.1px" height="31.4px" viewBox="0 0 17.1 31.4" style="enable-background:new 0 0 17.1 31.4;"
-							 xml:space="preserve">
-							<polyline class="st3" points="16.4,30.7 1.4,15.7 16.4,0.7 "/>
-						</svg>
-					</a>
-				</section>
-
-				<section class="sub-menu-middle">
-					<span class="description-toggle"><button>About</button></span>
-					<span class="share-toggle"><button>Share</button></span>
-				</section>
-
 				<section class="sub-menu-right">
-					<a href="<?php echo $nextPost; ?>">
-						<svg version="1.1"
-							 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
-							 x="0px" y="0px" width="17.1px" height="31.4px" viewBox="0 0 17.1 31.4" style="enable-background:new 0 0 17.1 31.4;"
-							 xml:space="preserve">
-							<polyline class="st3" points="0.7,0.7 15.7,15.7 0.7,30.7 "/>
-						</svg>
-					</a>
-				</section> -->
+					<ul>
+						<li><a href="<?php echo $nextPost; ?>">Next Project <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></li>
+						<li><a href="<?php echo $prevPost; ?>">Previous Project <i class="fa fa-long-arrow-left" aria-hidden="true"></i></a></li>
+					</ul>
+				</section>
 
 				<section class="project-grid">
 					<?php $images = get_field('single_project_grid'); ?>
@@ -189,6 +173,10 @@
 					$(".description-toggle button").on("click", function() {
 						$(".description").toggleClass("show");
 					});
+
+					setTimeout(function(){
+						$(".intro img").addClass("color");
+					}, 2660);
 
 					animate();
 				}

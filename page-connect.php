@@ -9,24 +9,24 @@
 					<p class="set-back">contact</p>
 					<p><?php echo get_field("address"); ?></p>
 					<p>
-							<a href="mailto:<?php echo get_field("email"); ?>"><?php echo get_field("email"); ?></a>
+							<a href="mailto:<?php echo get_field("email"); ?>"><i class="fa fa-envelope" aria-hidden="true"></i> <?php echo get_field("email"); ?></a>
 					</p>
 					<p><?php echo get_field("phone"); ?></p>
 				</div>
 				<div class="container">
 					<p class="set-back">Social</p>
-					<p><?php echo get_field("social_handle"); ?></p>
 					<div class="social-links">
 						<div>
 							<p>
-								<a href="<?php echo get_field("twitter"); ?>" target="_blank">Twitter</a><br>
-								<a href="<?php echo get_field("houzz"); ?>" target="_blank">Houzz</a>
+								<a href="<?php echo get_field("instagram"); ?>" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i> Instagram</a><br>
+								<a href="<?php echo get_field("twitter"); ?>" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i> Twitter</a><br>
+								<a href="<?php echo get_field("houzz"); ?>" target="_blank"><i class="fa fa-houzz" aria-hidden="true"></i> Houzz</a>
 							</p>
 						</div>
 						<div>
 							<p>
-								<a href="<?php echo get_field("facebook"); ?>" target="_blank">Facebook</a><br>
-								<a href="<?php echo get_field("linkedin"); ?>" target="_blank">Linkedin</a>
+								<a href="<?php echo get_field("facebook"); ?>" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i> Facebook</a><br>
+								<a href="<?php echo get_field("linkedin"); ?>" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i> Linkedin</a>
 							</p>
 						</div>
 					</div>

@@ -78,10 +78,15 @@ strong, b {
 $main-font: "Sofia Pro", Helvetica, sans-serif;
 $red: rgba(245,51,63,1);
 $black: #191919;
-$unit-1: calc(5px + .4vw + .4vh);
-$unit-2: calc(10px + .8vw + .8vh);
-$unit-3: calc(15px + 1.2vw + 1.2vh);
-$unit-4: calc(20px + 1.6vw + 1.6vh);
+$grey: #f4f3f2;
+$unit-1: calc( 6px + .2vw + .2vh);
+$unit-2: calc(12px + .2vw + .2vh);
+$unit-3: calc(18px + .4vw + .4vh);
+$unit-4: calc(24px + .4vw + .4vh);
+$unit-5: calc(30px + .6vw + .6vh);
+$unit-6: calc(36px + .6vw + .6vh);
+$unit-7: calc(42px + .8vw + .8vh);
+$unit-8: calc(48px + .8vw + .8vh);
 
 * {
   -webkit-font-smoothing: antialiased;
@@ -101,8 +106,9 @@ html {
 	font-size: 62.5%;
 }
 
+body * { -webkit-user-select: none; }
 body {
-	background: white;
+	background: $grey;
 	font-family: $main-font;
 	font-size: 12px;
   font-size: calc(16px + .3vw);
@@ -144,11 +150,11 @@ small {
 }
 
 p, ul {
-	margin: $unit-1;
+	margin: $unit-2;
 }
 
 h1, h2, h3, h4 {
-	margin: $unit-4 $unit-1;
+	margin: $unit-4 $unit-2;
 }
 
 a {
@@ -199,10 +205,17 @@ button {
 }
 
 .st3 {
-  fill:none;
-  stroke:$red;
-  stroke-width:1.2;
-  stroke-miterlimit:10;
+  fill: none;
+  stroke: $red;
+  stroke-width: 1.2;
+  stroke-miterlimit: 10;
+}
+
+.st4 {
+  fill: none;
+  stroke: $grey;
+  stroke-width: 1.2;
+  stroke-miterlimit: 10;
 }
 
 .set-back {
@@ -216,7 +229,7 @@ button {
     .logo {
 
       .st0 {
-        fill: white;
+        fill: $grey;
       }
     }
 
@@ -224,16 +237,17 @@ button {
 
       button {
 
-        .one {
-          background: white;
+        .st3 {
+          stroke: $grey;
+          backface-visibility: hidden;
+          transition: 440ms stroke cubic-bezier(.165, .84, .44, 1);
+          will-change: stroke;
         }
 
-        .two {
-          background: white;
-        }
-
-        .three {
-          background: white;
+        &:hover {
+          .st3 {
+            stroke: $black;
+          }
         }
       }
     }
@@ -241,8 +255,8 @@ button {
 
   .logo {
     position: fixed;
-    top: $unit-3;
-    left: $unit-3;
+    top: $unit-4;
+    left: $unit-4;
     z-index: 100;
 
     a {
@@ -267,66 +281,21 @@ button {
 
   .menu-toggle {
     position: fixed;
-    top: $unit-3;
-    right: $unit-3;
+    top: $unit-4;
+    right: $unit-4;
     z-index: 100;
 
     button {
-      // position: relative;
-      // width: 30px;
-      // height: 20px;
 
-      .one {
-        display: block;
-        position: absolute;
-        top: 0px;
-        left: 0px;
-        width: 100%;
-        height: 2px;
+      .st3 {
         backface-visibility: hidden;
-        background: $red;
-        transition: 440ms background cubic-bezier(.165, .84, .44, 1);
-        will-change: background;
-      }
-
-      .two {
-        display: block;
-        position: absolute;
-        top: 50%;
-        left: 0px;
-        width: 100%;
-        height: 2px;
-        transform: translate3d(0,-50%,0);
-        backface-visibility: hidden;
-        background: $red;
-        transition: 440ms background cubic-bezier(.165, .84, .44, 1);
-        will-change: background;
-      }
-
-      .three {
-        display: block;
-        position: absolute;
-        bottom: 0px;
-        left: 0px;
-        width: 100%;
-        height: 2px;
-        backface-visibility: hidden;
-        background: $red;
-        transition: 440ms background cubic-bezier(.165, .84, .44, 1);
-        will-change: background;
+        transition: 440ms stroke cubic-bezier(.165, .84, .44, 1);
+        will-change: stroke;
       }
 
       &:hover {
-        .one {
-          background: $black;
-        }
-
-        .two {
-          background: $black;
-        }
-
-        .three {
-          background: $black;
+        .st3 {
+          stroke: $black;
         }
       }
     }
@@ -343,7 +312,7 @@ button {
   width: 100vw;
   height: 100vh;
   backface-visibility: hidden;
-  background: white;
+  background: $grey;
   text-align: center;
   opacity: 0;
   pointer-events: none;
@@ -363,27 +332,27 @@ button {
       border-bottom: 1px solid transparent;
       backface-visibility: hidden;
       color: $red;
-      font-size: 2.4em;
-      font-weight: 200;
-      transition: 440ms border-bottom cubic-bezier(.165, .84, .44, 1);
-      will-change: border-bottom;
+      font-size: 3.2em;
+      font-weight: 100;
+      transition: 440ms color cubic-bezier(.165, .84, .44, 1);
+      will-change: color;
 
       &.current, &:hover {
-        border-bottom: 1px solid $red;
+        color: $black;
       }
     }
   }
 
   .logo {
     position: absolute;
-    top: $unit-3;
-    left: $unit-3;
+    top: $unit-4;
+    left: $unit-4;
   }
 
   .menu-toggle {
     position: absolute;
-    top: $unit-3;
-    right: $unit-3;
+    top: $unit-4;
+    right: $unit-4;
 
     button {
       position: relative;
@@ -426,8 +395,8 @@ button {
   height: 100vh;
   backface-visibility: hidden;
   background: rgba(245,51,63,.9);
-  color: white;
-  font-size: 3.6em;
+  color: $grey;
+  font-size: 4em;
   font-weight: 100;
   text-align: center;
   opacity: 0;
@@ -449,110 +418,105 @@ button {
   }
 }
 
-.slider {
-  position: relative;
-  width: 100vw;
-  height: 70vh;
-  min-height: 420px;
-  overflow: hidden;
+.grid-wrap {
+  padding: $unit-2;
+  padding-right: 20vw;
+  padding-left: 20vw;
+}
 
-  .slider-viewport {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 525vw;
-    height: 100%;
-    backface-visibility: hidden;
-    white-space: nowrap;
-    will-change: transform;
+.home {
 
-    &.animate {
-      transition: 880ms transform cubic-bezier(.165, .84, .44, 1);
-    }
+  .wrap {
+    position: relative;
+    width: 100vw;
+    height: auto;
 
-    .title {
-      display: none;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate3d(-50%, -50%, 0);
+    .window {
+      position: relative;
+      overflow: hidden;
 
-      .text {
-        color: white;
-        font-size: 3.6em;
-        font-weight: 100;
-      }
-    }
-
-    figure {
-      display: block;
-      width: 80vw;
-      width: calc(80vw + 5px + .4vw + .4vh);
-      height: 100%;
-      padding-right: $unit-2;
-      float: left;
-
-      a {
-        display: block;
+      .carousel {
         position: relative;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
+        top: 0;
+        left: -70vw;
+        width: 10000px;
+        backface-visibility: hidden;
+        will-change: transform;
 
-        &:hover {
+        .slide {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          width: 80vw;
+          max-height: 70vh;
+          padding: 0 $unit-2;
+          float: left;
+          cursor: pointer;
+
           img {
-            // transform: scale(1.01);
-            filter: grayscale(0%) brightness(.95);
+            backface-visibility: hidden;
+            filter: grayscale(100%) brightness(.85);
+            transition: 660ms filter cubic-bezier(.165, .84, .44, 1);
+            will-change: filter;
+          }
+
+          &:hover {
+            img {
+              filter: grayscale(0) brightness(.85);
+            }
           }
         }
 
-        &:after {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          width: 140vw;
-          padding-bottom: 140vw;
-          transform: translate(-50%,-50%);
-          border-radius: 50%;
-          box-shadow: inset 0px 0px 2000vw 30vw rgba(0,0,0,0.06);
-          content: '';
+        &.transition {
+          transition: 880ms transform cubic-bezier(.165, .84, .44, 1);
         }
+      }
+    }
 
-        img {
-          backface-visibility: hidden;
-          filter: grayscale(100%) brightness(.95);
-          transition: 660ms filter cubic-bezier(.165, .84, .44, 1), 1200ms transform cubic-bezier(.165, .84, .44, 1);
-          will-change: filter, transform;
+    .next {
+      position: absolute;
+      right: 0px;
+      bottom: 0px;
+      padding: $unit-4;
+      transform: translate3d(0, 100%, 0);
+    }
+
+    .prev {
+      position: absolute;
+      bottom: 0px;
+      left: 0px;
+      padding: $unit-4;
+      transform: translate3d(0, 100%, 0);
+    }
+  }
+
+  .sub-menu-left {
+
+    li {
+
+      i {
+
+        &:before {
+          content: '\f10c';
         }
       }
 
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
-      }
+      &.selected {
+        i {
 
-      &.hide {
-
-        img {
-          display: none;
+          &:before {
+            content: '\f192';
+          }
         }
       }
     }
   }
 }
 
-.grid-wrap {
-  padding: $unit-1;
-  padding-right: 20vw;
-  padding-left: 20vw;
-}
-
-.sub-menu {
+.sub-menu-left {
   position: fixed;
-  bottom: $unit-3;
-  left: $unit-3;
+  bottom: $unit-4;
+  left: $unit-4;
   transform: translate3d(-50%, 0, 0);
   line-height: 1.6;
   opacity: 0;
@@ -563,6 +527,68 @@ button {
 
   ul {
     margin: 0px;
+  }
+
+  &.show {
+    transform: translate3d(0,0,0);
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  button, a, label {
+    display: inline-block;
+    margin-top: $unit-1;
+    padding-bottom: 2px;
+    border-bottom: 1px solid transparent;
+    backface-visibility: hidden;
+    color: $red;
+    font-size: .8em;
+    line-height: 1;
+    cursor: pointer;
+    transition: 440ms color cubic-bezier(.165, .84, .44, 1);
+    will-change: color;
+
+    input {
+      display: none;
+    }
+
+    i {
+      display: inline-block;
+      width: 26px;
+      backface-visibility: hidden;
+      transition: 220ms margin-right cubic-bezier(.165, .84, .44, 1);
+      will-change: margin-right;
+    }
+
+    &.current {
+
+    }
+
+    &:hover {
+      color: $black;
+
+      i {
+        margin-right: 6px;
+      }
+    }
+  }
+}
+
+.sub-menu-right {
+  position: fixed;
+  right: $unit-4;
+  bottom: $unit-4;
+  transform: translate3d(50%, 0, 0);
+  line-height: 1.6;
+  opacity: 0;
+  pointer-events: none;
+  transition: 660ms opacity cubic-bezier(.165, .84, .44, 1), 660ms transform cubic-bezier(.165, .84, .44, 1);
+  will-change: opacity, transform;
+  z-index: 100;
+
+  ul {
+    margin: 0px;
+    text-align: right;
   }
 
   &.show {
@@ -580,14 +606,15 @@ button {
     color: $red;
     font-size: .8em;
     line-height: 1;
-    transition: 440ms border-bottom cubic-bezier(.165, .84, .44, 1);
-    will-change: border-bottom;
+    transition: 440ms color cubic-bezier(.165, .84, .44, 1);
+    will-change: color;
 
     i {
+      display: inline-block;
       width: 26px;
       backface-visibility: hidden;
-      transition: 220ms margin-right cubic-bezier(.165, .84, .44, 1);
-      will-change: margin-right;
+      transition: 220ms margin-left cubic-bezier(.165, .84, .44, 1);
+      will-change: margin-left;
     }
 
     &.current {
@@ -595,149 +622,11 @@ button {
     }
 
     &:hover {
+      color: $black;
 
       i {
-        margin-right: 6px;
+        margin-left: 6px;
       }
-    }
-  }
-}
-
-.sub-menu-left {
-  position: fixed;
-  bottom: $unit-3;
-  left: $unit-3;
-  transform: translate3d(-50%, 0, 0);
-  line-height: 1.6;
-  opacity: 0;
-  pointer-events: none;
-  transition: 660ms opacity cubic-bezier(.165, .84, .44, 1), 660ms transform cubic-bezier(.165, .84, .44, 1);
-  will-change: opacity, transform;
-  z-index: 100;
-
-  ul {
-    margin: 0px;
-  }
-
-  &.show {
-    transform: translate3d(0,0,0);
-    opacity: 1;
-    pointer-events: all;
-  }
-
-  button {
-    display: inline-block;
-    padding-bottom: 2px;
-    border-bottom: 1px solid transparent;
-    color: $red;
-    line-height: 1;
-    transition: 440ms border-bottom cubic-bezier(.165, .84, .44, 1);
-    will-change: border-bottom;
-
-    &.current, &:hover {
-      border-bottom: 1px solid $red;
-    }
-  }
-
-  a {
-    display: block;
-
-    svg {
-
-      display: block;
-    }
-  }
-}
-
-.sub-menu-middle {
-  position: fixed;
-  bottom: $unit-3;
-  left: 50%;
-  transform: translate3d(-50%, 50%, 0);
-  line-height: 1.6;
-  opacity: 0;
-  pointer-events: none;
-  transition: 660ms opacity cubic-bezier(.165, .84, .44, 1), 660ms transform cubic-bezier(.165, .84, .44, 1);
-  will-change: opacity, transform;
-  z-index: 100;
-
-  ul {
-    margin: 0px;
-  }
-
-  &.show {
-    transform: translate3d(-50%,0,0);
-    opacity: 1;
-    pointer-events: all;
-  }
-
-  button {
-    display: inline-block;
-    margin: 0 $unit-1;
-    padding-bottom: 2px;
-    border-bottom: 1px solid transparent;
-    color: $red;
-    line-height: 1;
-    transition: 440ms border-bottom cubic-bezier(.165, .84, .44, 1);
-    will-change: border-bottom;
-
-    &.current, &:hover {
-      border-bottom: 1px solid $red;
-    }
-  }
-
-  a {
-    display: block;
-
-    svg {
-
-      display: block;
-    }
-  }
-}
-
-.sub-menu-right {
-  position: fixed;
-  right: $unit-3;
-  bottom: $unit-3;
-  transform: translate3d(50%, 0, 0);
-  line-height: 1.6;
-  opacity: 0;
-  pointer-events: none;
-  transition: 660ms opacity cubic-bezier(.165, .84, .44, 1), 660ms transform cubic-bezier(.165, .84, .44, 1);
-  will-change: opacity, transform;
-  z-index: 100;
-
-  ul {
-    margin: 0px;
-  }
-
-  &.show {
-    transform: translate3d(0,0,0);
-    opacity: 1;
-    pointer-events: all;
-  }
-
-  button {
-    display: inline-block;
-    padding-bottom: 2px;
-    border-bottom: 1px solid transparent;
-    color: $red;
-    line-height: 1;
-    transition: 440ms border-bottom cubic-bezier(.165, .84, .44, 1);
-    will-change: border-bottom;
-
-    &.current, &:hover {
-      border-bottom: 1px solid $red;
-    }
-  }
-
-  a {
-    display: block;
-
-    svg {
-
-      display: block;
     }
   }
 }
@@ -750,7 +639,7 @@ button {
     width: 50%;
 
     figure {
-      padding: $unit-1;
+      padding: $unit-2;
     }
 
     figure a {
@@ -761,15 +650,14 @@ button {
 
       img {
         backface-visibility: hidden;
-        filter: grayscale(100%) brightness(.95);
-        transition: 660ms filter cubic-bezier(.165, .84, .44, 1), 1200ms transform cubic-bezier(.165, .84, .44, 1);
-        will-change: filter, transform;
+        filter: grayscale(100%) brightness(.85);
+        transition: 660ms filter cubic-bezier(.165, .84, .44, 1);
+        will-change: filter;
       }
 
       &:hover {
         img {
-          // transform: scale(1.02);
-          filter: grayscale(0%) brightness(.95);
+          filter: grayscale(0%) brightness(.85);
         }
       }
     }
@@ -823,37 +711,50 @@ button {
         height: 100%;
         object-fit: cover;
         object-position: center;
-        filter: brightness(.95);
+        backface-visibility: hidden;
+        filter: brightness(.85) grayscale(100%);
+        transition: 880ms filter cubic-bezier(.165, .84, .44, 1);
+        will-change: filter;
+
+        &.color {
+          filter: brightness(.85) grayscale(0);
+        }
       }
     }
   }
 
   .description {
-    -webkit-overflow-scrolling: touch;
+    display: flex;
     position: fixed;
     top: 0px;
     left: 0px;
+    align-items: center;
+    justify-content: center;
     width: 100vw;
     height: 100vh;
-    padding: 20vh 30vw;
-    overflow: scroll;
-    transform: translate3d(0, 100%, 0);
+    padding: 0;
+    overflow: hidden;
     backface-visibility: hidden;
     opacity: 0;
-    transition: 660ms transform cubic-bezier(.165, .84, .44, 1), 660ms opacity cubic-bezier(.165, .84, .44, 1);
-    will-change: transform, opacity;
+    pointer-events: none;
+    transition: 660ms opacity cubic-bezier(.165, .84, .44, 1);
+    will-change: opacity;
     z-index: 10001;
 
     &.show {
-      transform: translate3d(0, 0, 0);
       opacity: 1;
+      pointer-events: all;
     }
 
     .content {
+      -webkit-overflow-scrolling: touch;
       position: relative;
-      padding: $unit-2;
+      width: 50vw;
+      max-height: 100%;
+      padding: $unit-4;
+      overflow: scroll;
       background: $red;
-      color: white;
+      color: $grey;
       font-size: 1.2em;
       font-weight: 200;
       line-height: 1.5;
@@ -867,33 +768,22 @@ button {
   }
 
   .project-grid {
-    padding: $unit-2;
+    padding: $unit-4;
     padding-right: 20vw;
     padding-left: 20vw;
 
     img {
       width: 100%;
       max-height: 100vh;
-      padding: $unit-2;
+      padding: $unit-4;
       object-fit: contain;
       object-position: center;
-      filter: brightness(.95);
+      filter: brightness(.85);
     }
   }
 }
 
 .about {
-
-  .header {
-    .logo {
-
-      a {
-       .st0 {
-         fill: white;
-       }
-     }
-    }
-  }
 
   .image {
     position: fixed;
@@ -906,13 +796,14 @@ button {
     figure {
       width: 100%;
       height: 100%;
+      padding: 12.5vh $unit-4;
 
       img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
         object-position: center;
-        filter: brightness(.95);
+        filter: brightness(.85);
       }
     }
   }
@@ -920,7 +811,7 @@ button {
   .content {
     margin-right: 12.5vw;
     margin-left: 50vw;
-    padding: 12.5vh $unit-1;
+    padding: 12.5vh $unit-4;
     padding-right: 0px;
     font-size: 1.2em;
     line-height: 1.5;
@@ -930,27 +821,6 @@ button {
       padding-right: 0px;
     }
   }
-
-  .header {
-
-    .menu-toggle {
-
-      button {
-
-        .one {
-          background: $red;
-        }
-
-        .two {
-          background: $red;
-        }
-
-        .three {
-          background: $red;
-        }
-      }
-    }
-  }
 }
 
 .roster {
@@ -958,37 +828,43 @@ button {
   .modals {
 
     .person {
-      -webkit-overflow-scrolling: touch;
+      display: flex;
       position: fixed;
       top: 0px;
       left: 0px;
+      align-items: center;
+      justify-content: center;
       width: 100vw;
       height: 100vh;
-      padding: 20vh 30vw;
-      overflow: scroll;
-      transform: translate3d(0, 100%, 0);
+      padding: 0;
+      overflow: hidden;
       backface-visibility: hidden;
       opacity: 0;
-      transition: 660ms transform cubic-bezier(.165, .84, .44, 1), 660ms opacity cubic-bezier(.165, .84, .44, 1);
-      will-change: transform, opacity;
+      pointer-events: none;
+      transition: 660ms opacity cubic-bezier(.165, .84, .44, 1);
+      will-change: opacity;
       z-index: 100;
 
       &.show {
-        transform: translate3d(0, 0, 0);
         opacity: 1;
+        pointer-events: all;
       }
 
       .modal-container {
+        -webkit-overflow-scrolling: touch;
         position: relative;
-        padding: $unit-2;
+        width: 50vw;
+        max-height: 100%;
+        padding: $unit-4;
+        overflow: scroll;
         background: $red;
-        color: white;
+        color: $grey;
         font-size: 1.2em;
         font-weight: 200;
         line-height: 1.5;
 
         img {
-          margin: $unit-2 0px;
+          margin: $unit-4 0px;
         }
 
         .modal-close {
@@ -1003,12 +879,12 @@ button {
   .people {
     display: flex;
     flex-wrap: wrap;
-    padding-right: 25vw;
-    padding-left: $unit-1;
+    margin: 0 12vw;
+    padding: $unit-2;
 
     .person {
       width: 33.33%;
-      margin-bottom: $unit-2;
+      margin-bottom: $unit-4;
 
       button {
 
@@ -1037,10 +913,16 @@ button {
     left: 0px;
     width: 50vw;
     height: 100vh;
-    padding: $unit-1;
+    padding: $unit-2;
 
     a {
-      border-bottom: 1px solid $black;
+      backface-visibility: hidden;
+      transition: 440ms color cubic-bezier(.165, .84, .44, 1);
+      will-change: color;
+
+      &:hover {
+        color: $red;
+      }
     }
 
     .container {
@@ -1131,7 +1013,7 @@ button {
     font-size: 2.6em;
   }
 
-  .slider {
+  .wrap {
     display: none;
   }
 
@@ -1183,17 +1065,6 @@ button {
 
         button {
 
-          .one {
-            background: white;
-          }
-
-          .two {
-            background: white;
-          }
-
-          .three {
-            background: white;
-          }
         }
       }
     }
@@ -1256,6 +1127,6 @@ button {
 
 ::selection {
 	background: $red;
-	color: white;
+	color: $grey;
 	text-shadow: none;
 }

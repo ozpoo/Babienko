@@ -12,7 +12,17 @@
 								<div class="content">
 									<div class="modal-close">
 										<p>
-											<button>close</button>
+											<button>
+												<svg version="1.1"
+													 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+													 x="0px" y="0px" width="35px" height="19.3px" viewBox="0 0 35 19.3" style="enable-background:new 0 0 35 19.3;"
+													 xml:space="preserve">
+
+												<line class="st4" x1="0" y1="1" x2="35" y2="1"/>
+												<line class="st4" x1="0" y1="9.7" x2="35" y2="9.7"/>
+												<line class="st4" x1="0" y1="18.3" x2="35" y2="18.3"/>
+												</svg>
+											</button>
 										</p>
 									</div>
 									<div class="name">
@@ -23,16 +33,14 @@
 											<small><?php the_sub_field('credentials'); ?></small>
 										</p>
 									</div>
-									<div class="portrait">
+									<!-- <div class="portrait">
 										<p>
 											<picture>
 												<?php $image = get_sub_field('portrait'); ?>
-											  <source media="(min-width: 1200px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'large' )[0]; ?>">
-												<source media="(min-width: 600px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'medium' )[0]; ?>">
-											  <img src="<?php echo wp_get_attachment_image_src( $image, 'small' )[0]; ?>">
+											  <img src="<?php echo wp_get_attachment_image_src( $image, 'thumb_square' )[0]; ?>">
 											</picture>
 										</p>
-									</div>
+									</div> -->
 									<div class="bio">
 										<?php the_sub_field('bio'); ?>
 									</div>
@@ -49,25 +57,23 @@
 					<?php while ( have_rows('person') ) : the_row(); ?>
 						<div class="person">
 							<div class="name">
-								<p class="set-back"><?php the_sub_field('name'); ?></p>
+								<p class="set-back"><?php the_sub_field('name'); ?> &mdash; <small><?php the_sub_field('credentials'); ?></small></p>
 							</div>
 							<div class="portrait modal-toggle">
 								<p>
 									<button data-index="<?php echo $index++; ?>">
 										<picture>
 											<?php $image = get_sub_field('portrait'); ?>
-										  <source media="(min-width: 1800px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'large' )[0]; ?>">
-											<source media="(min-width: 600px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'medium' )[0]; ?>">
-										  <img src="<?php echo wp_get_attachment_image_src( $image, 'small' )[0]; ?>">
+										  <img src="<?php echo wp_get_attachment_image_src( $image, 'thumb_square' )[0]; ?>">
 										</picture>
 									</button>
 								</p>
 							</div>
-							<div class="credentials">
+							<!-- <div class="credentials">
 								<p>
 									<small><?php the_sub_field('credentials'); ?></small>
 								</p>
-							</div>
+							</div> -->
 						</div>
 					<?php endwhile; ?>
 				<?php endif; ?>

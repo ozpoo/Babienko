@@ -4,47 +4,83 @@
 
 		<section>
 
-			<section class="slider">
-				<?php
-					$args = array(
-				    'post_type'				=> 'build',
-						'posts_per_page'	=> -1,
-						'meta_key'		=> 'home_feature_slider',
-						'meta_value'	=> 1
-				    );
-					$the_query = new WP_Query( $args );
-				?>
-				<?php $count=0; ?>
-				<div class="slider-viewport animate">
-					<?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
-						<figure class="project" data-index="<?php echo $count++; ?>">
-							<a href="<?php the_permalink(); ?>">
-								<picture>
-									<?php $image = get_field( "home_feature_slider_image" ); ?>
-									<source media="(min-width: 2000px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'x-large' )[0]; ?>">
-								  <source media="(min-width: 1600px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'large' )[0]; ?>">
-									<source media="(min-width: 600px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'medium' )[0]; ?>">
-								  <img src="<?php echo wp_get_attachment_image_src( $image, 'thumb_square' )[0]; ?>">
-								</picture>
-								<div class="title">
-									<div class="text">
-										<?php the_title(); ?>
-									</div>
-								</div>
-							</a>
-						</figure>
-					<?php endwhile; ?>
+			<section class="wrap">
+			  <div class="window">
+			    <div class="carousel">
+						<?php
+							$args = array(
+						    'post_type'				=> 'build',
+								'posts_per_page'	=> -1,
+								'meta_key'		=> 'home_feature_slider',
+								'meta_value'	=> 1
+						    );
+							$the_query = new WP_Query( $args );
+						?>
+						<?php $count=0; ?>
+						<?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
+							<figure class="project slide" data-index="<?php echo $count++; ?>">
+								<a href="<?php the_permalink(); ?>">
+									<picture>
+										<?php $image = get_field( "home_feature_slider_image" ); ?>
+										<source media="(min-width: 2000px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'x-large' )[0]; ?>">
+									  <source media="(min-width: 1600px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'large' )[0]; ?>">
+										<source media="(min-width: 600px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'medium' )[0]; ?>">
+									  <img draggable="false" src="<?php echo wp_get_attachment_image_src( $image, 'thumb_square' )[0]; ?>">
+									</picture>
+								</a>
+							</figure>
+						<?php endwhile; ?>
+						<?php wp_reset_query(); ?>
+			    </div>
+			  </div>
+				<div class="prev">
+					<button>PREV</button>
 				</div>
-				<?php wp_reset_query(); ?>
+				<div class="next">
+				  <button>NEXT</button>
+				</div>
 			</section>
 
-			<section class="sub-menu">
-				<ul class="filter">
-					<li class="all"><button class="current" data-filter="*"><i class="fa fa-dot-circle-o" aria-hidden="true"></i> All</button></li>
-					<li class="residence"><button data-filter=".Residence"><i class="fa fa-circle-o" aria-hidden="true"></i> Residence</button></li>
-					<li class="non-residence"><button data-filter=".Non-Residence"><i class="fa fa-circle-o" aria-hidden="true"></i> Non-Residence</button></li>
-					<li class="in-progress"><button data-filter=".In-Progress"><i class="fa fa-circle-o" aria-hidden="true"></i> In-Progress</button></li>
+			<section class="sub-menu-left">
+				<ul class="filters">
+					<li class="selected">
+						<label>
+				      <input type="checkbox" value="all" >
+				      <i class="fa" aria-hidden="true"></i> All
+				    </label>
+					</li>
+					<li>
+						<label>
+				      <input type="checkbox" value="residence" >
+				      <i class="fa" aria-hidden="true"></i> Residence
+				    </label>
+					</li>
+					<li>
+						<label>
+				      <input type="checkbox" value="non-residence" >
+				      <i class="fa" aria-hidden="true"></i> Non-Residence
+				    </label>
+					</li>
+					<li>
+						<label>
+				      <input type="checkbox" value="in-progress" >
+				      <i class="fa" aria-hidden="true"></i> In-Progress
+				    </label>
+					</li>
+					<li>
+						<label>
+				      <input type="checkbox" value="details" >
+				      <i class="fa" aria-hidden="true"></i> Details
+				    </label>
+					</li>
 				<ul>
+			</section>
+
+			<section class="sub-menu-right">
+				<ul>
+					<li class="share-toggle"><button>Share <i class="fa fa-share" aria-hidden="true"></i></button></li>
+					<li class="contact-toggle"><button>info@studiobarc.com <i class="fa fa-envelope" aria-hidden="true"></i></button></li>
+				</ul>
 			</section>
 
 			<section class="grid-wrap">
@@ -59,7 +95,7 @@
 					<?php $count = 0; ?>
 					<?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
 						<?php $categories = get_the_category(); ?>
-						<div class="grid-item <?php echo esc_html( $categories[0]->name ); ?>" data-category="<?php echo esc_html( $categories[0]->name ); ?>">
+						<div class="grid-item all <?php echo strtolower(esc_html( $categories[0]->name )); ?>">
 							<?php if($count % 3 == 0): ?>
 								<?php $image = get_field('home_grid_landscape'); ?>
 									<figure>
@@ -94,11 +130,6 @@
 										</a>
 									</figure>
 								<?php endif; ?>
-								<div class="title">
-									<div class="text">
-										<?php the_title(); ?>
-									</div>
-								</div>
 							</div>
 						<?php $count++; ?>
 					<?php endwhile; ?>
@@ -116,79 +147,92 @@
 
 			$(function () {
 
-				var $scrollTop;
-
 				$(window).load(function() {
 					init();
 				});
 
 			 var init = function(time) {
-
-				 initSlider();
-
-					$('.filter button').on( 'click', function() {
-						var filterValue = $(this).attr('data-filter');
-						// $iso.isotope({ filter: filterValue });
-						$(".current").removeClass("current");
-						$(this).addClass("current");
-					});
-
+				 initCarousel();
+				 initMasonry();
  				 animate();
  				}
 
-				var animate = function(time) {
-					requestAnimationFrame( animate );
-					$scrollTop = $(document).scrollTop();
+				 var initCarousel = function() {
+					 // Set varialbes
+					 var $carousel, $threshold, $slideWidth, $dragStart, $dragEnd;
+					 $carousel = $('.carousel');
+					 $threshold = 150;
+					 $slideWidth = $(".slide").innerWidth();
 
-					if($scrollTop > $(window).height()*.25) {
-						$(".sub-menu").addClass("show");
-					} else {
-						$(".sub-menu").removeClass("show");
+					$('.next button').click(function(){ shiftSlide(-1) });
+					$('.prev button').click(function(){ shiftSlide(1) });
+
+					// Add control functionality
+					// $carousel.on('mousedown', function(){
+					//   if ($carousel.hasClass('transition')) return;
+					//   $dragStart = event.pageX;
+					//   $(this).on('mousemove', function(){
+					//     $dragEnd = event.pageX;
+					//     $(this).css('transform','translateX('+ dragPos() +'px)')
+					//   });
+					//   $(document).on('mouseup', function(){
+					//     if (dragPos() > $threshold) { return shiftSlide(1) }
+					//     if (dragPos() < -$threshold) { return shiftSlide(-1) }
+					//     shiftSlide(0);
+					//   });
+					// });
+
+					// Set responsive slide width
+					$(window).resize(function() {
+						$slideWidth = $(".slide").innerWidth();
+					});
+
+					function dragPos() {
+					  return $dragEnd - $dragStart;
+					}
+
+					function shiftSlide(direction) {
+					  if ($carousel.hasClass('transition')) return;
+					  $dragEnd = $dragStart;
+					  $(document).off('mouseup')
+					  $carousel.off('mousemove')
+					          .addClass('transition')
+					          .css('transform','translateX(' + (direction * $slideWidth) + 'px)');
+					  setTimeout(function(){
+					    if (direction === 1) {
+					      $('.slide:first').before($('.slide:last'));
+					    } else if (direction === -1) {
+					      $('.slide:last').after($('.slide:first'));
+					    }
+					    $carousel.removeClass('transition')
+							$carousel.css('transform','translateX(0px)');
+					  }, 880)
 					}
 				}
 
-				function initSlider() {
-
-					// Set initial selected
-					$(".project").eq(0).addClass("is-selected");
-					$(".project").eq(3).addClass("hide");
-					$(".project").eq(4).addClass("hide");
-
-					$('.grid').masonry({
+				var initMasonry = function() {
+					// Init masonry grid and reload on imagesLoaded
+					var $grid;
+					$grid = $('.grid').filterMasonry({
 					  itemSelector: '.grid-item',
+						filtersGroupSelector:'.filters',
 					  percentPosition: true,
 					});
-
-					// Set click event
-					$(document).on("click", ".project a", function (ev) {
-						var proj = $(this).closest(".project");
-						if(!$(proj).hasClass("is-selected")){
-							ev.preventDefault();
-							sliderSelect();
-						}
+					$grid.imagesLoaded().progress( function() {
+					  $grid.masonry('layout');
 					});
-
 				}
 
-				function sliderSelect() {
+				var animate = function(time) {
+					var $scrollTop;
+					$scrollTop = $(document).scrollTop();
+					requestAnimationFrame( animate );
 
-					var deltaX = $(".project").innerWidth();
-
-					$(".slider-viewport").append($(".project").eq(0).clone().addClass("hide"));
-					$(".is-selected").removeClass("is-selected");
-					$(".slider-viewport").css("transform", "translate3d(-"+deltaX+"px, 0, 0)");
-
-					setTimeout(function(){
-						$(".slider-viewport").removeClass("animate");
-						$(".slider-viewport").css("transform", "translate3d(0, 0, 0)");
-						$(".project").eq(0).remove();
-						setTimeout(function(){
-							$(".slider-viewport").addClass("animate");
-							$(".project").eq(0).addClass("is-selected");
-							$(".project").eq(2).removeClass("hide");
-						}, 10);
-					}, 880);
-
+					if($scrollTop > $(window).height()*.25) {
+						$(".sub-menu-left, .sub-menu-right").addClass("show");
+					} else {
+						$(".sub-menu-left, .sub-menu-right").removeClass("show");
+					}
 				}
 
 				var requestAnimationFrame = (function(){
@@ -201,6 +245,7 @@
 										 window.setTimeout(callback, 1000 / 60);
 								 };
 				 })();
+
 			});
 
 		})(jQuery, this);
