@@ -712,12 +712,12 @@ button {
         object-fit: cover;
         object-position: center;
         backface-visibility: hidden;
-        filter: brightness(.85) grayscale(100%);
-        transition: 880ms filter cubic-bezier(.165, .84, .44, 1);
+        filter: brightness(.85) grayscale(0);
+        transition: 1880ms filter cubic-bezier(.165, .84, .44, 1);
         will-change: filter;
 
         &.color {
-          filter: brightness(.85) grayscale(0);
+          // filter: brightness(.85) grayscale(0);
         }
       }
     }

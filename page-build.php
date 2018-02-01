@@ -34,10 +34,26 @@
 			    </div>
 			  </div>
 				<div class="prev">
-					<button>PREV</button>
+					<button>
+						<svg version="1.1"
+							 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+							 x="0px" y="0px" width="61.4px" height="29.7px" viewBox="0 0 61.4 29.7" style="enable-background:new 0 0 61.4 29.7;"
+							 xml:space="preserve">
+						<line class="st3" x1="61.4" y1="14.8" x2="1.4" y2="14.8"/>
+						<polyline class="st3" points="15.6,29 1.4,14.8 15.6,0.7 "/>
+						</svg>
+					</button>
 				</div>
 				<div class="next">
-				  <button>NEXT</button>
+				  <button>
+						<svg version="1.1"
+							 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+							 x="0px" y="0px" width="61.4px" height="29.7px" viewBox="0 0 61.4 29.7" style="enable-background:new 0 0 61.4 29.7;"
+							 xml:space="preserve">
+						<line class="st3" x1="0" y1="14.8" x2="60" y2="14.8"/>
+						<polyline class="st3" points="45.9,0.7 60,14.8 45.9,29 "/>
+						</svg>
+					</button>
 				</div>
 			</section>
 

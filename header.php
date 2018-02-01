@@ -149,7 +149,7 @@
 			<section class="title-fade show">
 				<div class="text">
 					<?php if(is_front_page()): ?>
-						babienko architects
+						babienko
 					<?php else: ?>
 						<?php echo strtolower(get_the_title()); ?>
 					<?php endif; ?>
