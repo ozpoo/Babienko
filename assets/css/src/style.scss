@@ -1153,6 +1153,12 @@ button {
 
   .mobile {
     display: block;
+    .left {
+      text-align: left;
+    }
+    .right {
+      text-align: right;
+    }
   }
 
   .not-mobile {
@@ -1216,7 +1222,7 @@ button {
       bottom: 0;
       left: 0;
       width: 100vw;
-      padding: 0 $unit-4;
+      padding: 0;
       overflow: scroll;
       transform: translate3d(0, 100%, 0);
       white-space: nowrap;
