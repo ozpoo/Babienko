@@ -76,7 +76,7 @@ strong, b {
 }
 
 $main-font: "Sofia Pro", Helvetica, sans-serif;
-$red: rgba(245,51,63,1);
+$red: rgba(235,0,69,1);
 $black: #191919;
 $grey: #f4f3f2;
 $unit-1: calc( 6px + .2vw + .2vh);
@@ -537,8 +537,7 @@ button {
 
   button, a, label {
     display: inline-block;
-    margin-top: $unit-1;
-    padding-bottom: 2px;
+    margin-top: .6vh;
     border-bottom: 1px solid transparent;
     backface-visibility: hidden;
     color: $red;
@@ -599,8 +598,7 @@ button {
 
   button, a {
     display: inline-block;
-    margin-top: $unit-1;
-    padding-bottom: 2px;
+    margin-top: .6vh;
     border-bottom: 1px solid transparent;
     backface-visibility: hidden;
     color: $red;
@@ -753,7 +751,7 @@ button {
       max-height: 100%;
       padding: $unit-4;
       overflow: scroll;
-      background: $red;
+      background: rgba(235,0,69,.9);
       color: $grey;
       font-size: 1.2em;
       font-weight: 200;
@@ -763,6 +761,36 @@ button {
         position: absolute;
         top: 0px;
         right: 0px;
+
+        button {
+          position: relative;
+          top: 0px;
+          right: 0px;
+          width: 40px;
+          height: 40px;
+
+          .one {
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 1px;
+            transform: translate3d(-50%,-50%,0) rotate(-45deg);
+            background: $grey;
+          }
+
+          .two {
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 1px;
+            transform: translate3d(-50%,-50%,0) rotate(45deg);
+            background: $grey;
+          }
+        }
       }
     }
   }
@@ -854,10 +882,10 @@ button {
         -webkit-overflow-scrolling: touch;
         position: relative;
         width: 50vw;
-        max-height: 100%;
+        max-height: 80%;
         padding: $unit-4;
         overflow: scroll;
-        background: $red;
+        background: rgba(235,0,69,.9);
         color: $grey;
         font-size: 1.2em;
         font-weight: 200;
@@ -871,6 +899,36 @@ button {
           position: absolute;
           top: 0px;
           right: 0px;
+
+          button {
+            position: relative;
+            top: 0px;
+            right: 0px;
+            width: 40px;
+            height: 40px;
+
+            .one {
+              display: block;
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              width: 100%;
+              height: 1px;
+              transform: translate3d(-50%,-50%,0) rotate(-45deg);
+              background: $grey;
+            }
+
+            .two {
+              display: block;
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              width: 100%;
+              height: 1px;
+              transform: translate3d(-50%,-50%,0) rotate(45deg);
+              background: $grey;
+            }
+          }
         }
       }
     }
@@ -905,6 +963,91 @@ button {
   }
 }
 
+.share {
+  display: flex;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  padding: 0;
+  overflow: hidden;
+  backface-visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: 660ms opacity cubic-bezier(.165, .84, .44, 1);
+  will-change: opacity;
+  z-index: 100;
+
+  &.show {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .share-container {
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+    max-height: 100%;
+    padding: 10vh 10vw;
+    overflow: scroll;
+    background: rgba(235,0,69,.9);
+    color: $grey;
+    font-size: 1.2em;
+    font-weight: 200;
+    line-height: 1.5;
+    text-align: center;
+
+    a {
+      color: $grey;
+
+      &:hover {
+        color: $black;
+      }
+    }
+
+    img {
+      margin: $unit-4 0px;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+
+      button {
+        position: relative;
+        top: 0px;
+        right: 0px;
+        width: 40px;
+        height: 40px;
+
+        .one {
+          display: block;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 100%;
+          height: 1px;
+          transform: translate3d(-50%,-50%,0) rotate(-45deg);
+          background: $grey;
+        }
+
+        .two {
+          display: block;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 100%;
+          height: 1px;
+          transform: translate3d(-50%,-50%,0) rotate(45deg);
+          background: $grey;
+        }
+      }
+    }
+  }
+}
+
 .connect {
 
   .left {
@@ -920,8 +1063,20 @@ button {
       transition: 440ms color cubic-bezier(.165, .84, .44, 1);
       will-change: color;
 
+      i {
+        display: inline-block;
+        width: 26px;
+        backface-visibility: hidden;
+        transition: 220ms margin-right cubic-bezier(.165, .84, .44, 1);
+        will-change: margin-right;
+      }
+
       &:hover {
         color: $red;
+
+        i {
+          margin-right: 6px;
+        }
       }
     }
 
@@ -950,6 +1105,13 @@ button {
     p {
       margin-right: 0;
       margin-left: 0;
+    }
+
+    button {
+      &:hover {
+        border-bottom-color: transparent;
+        color: $red;
+      }
     }
 
     .news-post {
@@ -1126,7 +1288,7 @@ button {
 }
 
 ::selection {
-	background: $red;
+	background: rgba(235,0,69,.9);
 	color: $grey;
 	text-shadow: none;
 }

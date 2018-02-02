@@ -133,10 +133,35 @@
 			<section class="description">
 				<div class="content">
 					<div class="description-toggle">
-						<p><button>close</button></p>
+						<p>
+							<button>
+								<span class="one"></span>
+								<span class="two"></span>
+							</button>
+						</p>
 					</div>
 					<h1><?php the_title(); ?></h1>
 					<?php the_content(); ?>
+				</div>
+			</section>
+
+			<section class="share">
+				<div class="share-container">
+					<div class="content">
+						<div class="modal-close">
+							<p>
+								<button>
+									<span class="one"></span>
+									<span class="two"></span>
+								</button>
+							</p>
+						</div>
+						<ul>
+							<li><a target="_blank" href="http://www.facebook.com/sharer.php?u=<?php the_permalink(); ?>">Facebook</a></li>
+							<li><a href="https://twitter.com/share?url=<?php the_permalink(); ?>&text=<?php the_title(); ?>&via=Babienko">Twitter</a></li>
+							<li><a href="https://pinterest.com/pin/create/bookmarklet/?media=[post-img]&url=<?php the_permalink(); ?>&description=<?php the_title(); ?>">Pinterest</a>
+						</ul>
+					</div>
 				</div>
 			</section>
 
@@ -172,6 +197,13 @@
 				var init = function(time) {
 					$(".description-toggle button").on("click", function() {
 						$(".description").toggleClass("show");
+					});
+
+					$('.share-toggle').click(function(){
+						$(".share").addClass("show");
+					});
+					$('.modal-close').click(function(){
+						$(".share").removeClass("show");
 					});
 
 					setTimeout(function(){

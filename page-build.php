@@ -95,7 +95,7 @@
 			<section class="sub-menu-right">
 				<ul>
 					<li class="share-toggle"><button>Share <i class="fa fa-share" aria-hidden="true"></i></button></li>
-					<li class="contact-toggle"><button>info@studiobarc.com <i class="fa fa-envelope" aria-hidden="true"></i></button></li>
+					<li class="contact-toggle"><a href="mailto:info@studiobarc.com">info@studiobarc.com <i class="fa fa-envelope" aria-hidden="true"></i></a></li>
 				</ul>
 			</section>
 
@@ -153,6 +153,26 @@
 				</div>
 			</section>
 
+			<section class="share">
+				<div class="share-container">
+					<div class="content">
+						<div class="modal-close">
+							<p>
+								<button>
+									<span class="one"></span>
+									<span class="two"></span>
+								</button>
+							</p>
+						</div>
+						<ul>
+							<li><a target="_blank" href="http://www.facebook.com/sharer.php?u=<?php the_permalink(); ?>">Facebook</a></li>
+							<li><a href="https://twitter.com/share?url=<?php the_permalink(); ?>&text=<?php the_title(); ?>&via=Babienko">Twitter</a></li>
+							<li><a href="https://pinterest.com/pin/create/bookmarklet/?media=[post-img]&url=<?php the_permalink(); ?>&description=<?php the_title(); ?>">Pinterest</a>
+						</ul>
+					</div>
+				</div>
+			</section>
+
 		</section>
 
 	</main>
@@ -171,6 +191,12 @@
 				 initCarousel();
 				 initMasonry();
  				 animate();
+				 $('.share-toggle').click(function(){
+					 $(".share").addClass("show");
+				 });
+				 $('.modal-close').click(function(){
+					 $(".share").removeClass("show");
+				 });
  				}
 
 				 var initCarousel = function() {
@@ -183,37 +209,15 @@
 					$('.next button').click(function(){ shiftSlide(-1) });
 					$('.prev button').click(function(){ shiftSlide(1) });
 
-					// Add control functionality
-					// $carousel.on('mousedown', function(){
-					//   if ($carousel.hasClass('transition')) return;
-					//   $dragStart = event.pageX;
-					//   $(this).on('mousemove', function(){
-					//     $dragEnd = event.pageX;
-					//     $(this).css('transform','translateX('+ dragPos() +'px)')
-					//   });
-					//   $(document).on('mouseup', function(){
-					//     if (dragPos() > $threshold) { return shiftSlide(1) }
-					//     if (dragPos() < -$threshold) { return shiftSlide(-1) }
-					//     shiftSlide(0);
-					//   });
-					// });
-
 					// Set responsive slide width
 					$(window).resize(function() {
 						$slideWidth = $(".slide").innerWidth();
 					});
 
-					function dragPos() {
-					  return $dragEnd - $dragStart;
-					}
-
 					function shiftSlide(direction) {
 					  if ($carousel.hasClass('transition')) return;
 					  $dragEnd = $dragStart;
-					  $(document).off('mouseup')
-					  $carousel.off('mousemove')
-					          .addClass('transition')
-					          .css('transform','translateX(' + (direction * $slideWidth) + 'px)');
+					  $carousel.addClass('transition').css('transform','translateX(' + (direction * $slideWidth) + 'px)');
 					  setTimeout(function(){
 					    if (direction === 1) {
 					      $('.slide:first').before($('.slide:last'));
@@ -222,7 +226,7 @@
 					    }
 					    $carousel.removeClass('transition')
 							$carousel.css('transform','translateX(0px)');
-					  }, 880)
+					  }, 880);
 					}
 				}
 

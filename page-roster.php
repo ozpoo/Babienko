@@ -13,26 +13,22 @@
 									<div class="modal-close">
 										<p>
 											<button>
-												<svg version="1.1"
-													 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
-													 x="0px" y="0px" width="35px" height="19.3px" viewBox="0 0 35 19.3" style="enable-background:new 0 0 35 19.3;"
-													 xml:space="preserve">
-
-												<line class="st4" x1="0" y1="1" x2="35" y2="1"/>
-												<line class="st4" x1="0" y1="9.7" x2="35" y2="9.7"/>
-												<line class="st4" x1="0" y1="18.3" x2="35" y2="18.3"/>
-												</svg>
+												<span class="one"></span>
+												<span class="two"></span>
 											</button>
 										</p>
 									</div>
 									<div class="name">
 										<p><?php the_sub_field('name'); ?></p>
 									</div>
-									<div class="credentials">
-										<p>
-											<small><?php the_sub_field('credentials'); ?></small>
-										</p>
-									</div>
+									<?php $cred = get_sub_field('credentials'); ?>
+									<?php if($cred): ?>
+										<div class="credentials">
+											<p>
+												<small><?php echo $cred; ?></small>
+											</p>
+										</div>
+									<?php endif; ?>
 									<!-- <div class="portrait">
 										<p>
 											<picture>
@@ -56,8 +52,9 @@
 				<?php if( have_rows('person') ): ?>
 					<?php while ( have_rows('person') ) : the_row(); ?>
 						<div class="person">
+							<?php $cred = get_sub_field('credentials'); ?>
 							<div class="name">
-								<p class="set-back"><?php the_sub_field('name'); ?> &mdash; <small><?php the_sub_field('credentials'); ?></small></p>
+								<p class="set-back"><?php the_sub_field('name'); ?><?php if($cred): ?> &mdash; <small><?php the_sub_field('credentials'); ?><?php endif; ?></small></p>
 							</div>
 							<div class="portrait modal-toggle">
 								<p>
