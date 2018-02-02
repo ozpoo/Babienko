@@ -75,7 +75,7 @@
 							<?php $image = get_field( "single_project_hero" ); ?>
 						  <source media="(min-width: 1800px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'large' )[0]; ?>">
 							<source media="(min-width: 600px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'medium' )[0]; ?>">
-						  <img src="<?php echo wp_get_attachment_image_src( $image, 'thumb_square' )[0]; ?>">
+						  <img src="<?php echo wp_get_attachment_image_src( $image, 'small' )[0]; ?>">
 						</picture>
 					</figure>
 				</section>
@@ -124,7 +124,7 @@
 							<picture>
 							  <source media="(min-width: 1800px)" srcset="<?php echo wp_get_attachment_image_src( $image['ID'], 'large' )[0]; ?>">
 								<source media="(min-width: 600px)" srcset="<?php echo wp_get_attachment_image_src( $image['ID'], 'medium' )[0]; ?>">
-							  <img src="<?php echo wp_get_attachment_image_src( $image['ID'], 'thumb_square' )[0]; ?>">
+							  <img src="<?php echo wp_get_attachment_image_src( $image['ID'], 'small' )[0]; ?>">
 							</picture>
 						</figure>
 	        <?php endforeach; ?>
