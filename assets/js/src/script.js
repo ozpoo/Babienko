@@ -32,7 +32,6 @@
 		}
 
 		function size() {
-			$(".home main, .roster main, .connect main, .connect .left").css("margin-top", $(".logo").innerHeight() + ($(".logo").position().top*2));
 			$(".title-fade, .intro").css("height", $(window).height());
 		}
 

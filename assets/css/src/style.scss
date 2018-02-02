@@ -761,6 +761,10 @@ button {
       font-weight: 200;
       line-height: 1.5;
 
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
       .description-toggle {
         position: absolute;
         top: 0px;
@@ -897,6 +901,10 @@ button {
         font-weight: 200;
         line-height: 1.5;
 
+        &::-webkit-scrollbar {
+          display: none;
+        }
+
         .modal-close {
           position: absolute;
           top: 0px;
@@ -999,6 +1007,10 @@ button {
     font-weight: 200;
     line-height: 1.5;
     text-align: center;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
     a {
       color: $grey;
@@ -1288,6 +1300,9 @@ button {
           font-weight: 200;
           line-height: 1.5;
 
+          &::-webkit-scrollbar {
+            display: none;
+          }
           .modal-close {
             position: absolute;
             top: 0px;
@@ -1381,6 +1396,7 @@ button {
   }
 
   .sub-menu-left {
+    -webkit-overflow-scrolling: touch;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -1395,6 +1411,10 @@ button {
     transition: 660ms opacity cubic-bezier(.165, .84, .44, 1), 660ms transform cubic-bezier(.165, .84, .44, 1);
     will-change: opacity, transform;
     z-index: 100;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
     ul {
       margin: 0px;
