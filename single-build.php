@@ -103,8 +103,10 @@
 
 				<section class="sub-menu-left">
 					<ul>
+						<li class="mobile"><a href="<?php echo $nextPost; ?>">Next Project <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></li>
 						<li class="description-toggle"><button><i class="fa fa-question" aria-hidden="true"></i> Project Description</button></li>
 						<li class="share-toggle"><button><i class="fa fa-share" aria-hidden="true"></i> Share Project</button></li>
+						<li class="mobile"><a href="<?php echo $prevPost; ?>">Previous Project <i class="fa fa-long-arrow-left" aria-hidden="true"></i></a></li>
 					</ul>
 				</section>
 

@@ -1143,7 +1143,15 @@ button {
   }
 }
 
+.mobile {
+  display: none;
+}
+
 @media only screen and (max-width: 680px) {
+
+  .mobile {
+    display: block;
+  }
 
 
   .header {
