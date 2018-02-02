@@ -134,10 +134,12 @@
 				<div class="content">
 					<div class="description-toggle">
 						<p>
-							<button>
-								<span class="one"></span>
-								<span class="two"></span>
-							</button>
+							<span class="spin">
+								<button class="spinner">
+									<span class="one"></span>
+									<span class="two"></span>
+								</button>
+							</span>
 						</p>
 					</div>
 					<h1><?php the_title(); ?></h1>
@@ -150,10 +152,12 @@
 					<div class="content">
 						<div class="modal-close">
 							<p>
-								<button>
-									<span class="one"></span>
-									<span class="two"></span>
-								</button>
+								<span class="spin">
+									<button class="spinner">
+										<span class="one"></span>
+										<span class="two"></span>
+									</button>
+								</span>
 							</p>
 						</div>
 						<ul>

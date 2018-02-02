@@ -12,31 +12,18 @@
 								<div class="content">
 									<div class="modal-close">
 										<p>
-											<button>
-												<span class="one"></span>
-												<span class="two"></span>
-											</button>
+											<span class="spin">
+												<button class="spinner">
+													<span class="one"></span>
+													<span class="two"></span>
+												</button>
+											</span>
 										</p>
-									</div>
-									<div class="name">
-										<p><?php the_sub_field('name'); ?></p>
 									</div>
 									<?php $cred = get_sub_field('credentials'); ?>
-									<?php if($cred): ?>
-										<div class="credentials">
-											<p>
-												<small><?php echo $cred; ?></small>
-											</p>
-										</div>
-									<?php endif; ?>
-									<!-- <div class="portrait">
-										<p>
-											<picture>
-												<?php $image = get_sub_field('portrait'); ?>
-											  <img src="<?php echo wp_get_attachment_image_src( $image, 'thumb_square' )[0]; ?>">
-											</picture>
-										</p>
-									</div> -->
+									<div class="name">
+										<p><?php the_sub_field('name'); ?><?php if($cred): ?> &mdash; <small><?php echo $cred; ?></small><?php endif; ?></p>
+									</div>
 									<div class="bio">
 										<?php the_sub_field('bio'); ?>
 									</div>
@@ -66,11 +53,6 @@
 									</button>
 								</p>
 							</div>
-							<!-- <div class="credentials">
-								<p>
-									<small><?php the_sub_field('credentials'); ?></small>
-								</p>
-							</div> -->
 						</div>
 					<?php endwhile; ?>
 				<?php endif; ?>

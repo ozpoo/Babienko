@@ -136,10 +136,12 @@
 					</nav>
 
 					<div class="menu-toggle">
-						<button>
-							<span class="one"></span>
-							<span class="two"></span>
-						</button>
+						<span class="spin">
+							<button class="spinner">
+								<span class="one"></span>
+								<span class="two"></span>
+							</button>
+						</span>
 					</div>
 
 				</section>

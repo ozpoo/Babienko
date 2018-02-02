@@ -182,17 +182,21 @@ button {
 }
 
 .spin {
-  display: block;
+  display: inline-block;
 
-  svg {
+  .spinner{
+    display: inline-block;
     transform: rotate(0deg);
     backface-visibility: hidden;
-    transition: 220ms transform cubic-bezier(.165, .84, .44, 1);
+    transition: 440ms transform cubic-bezier(.165, .84, .44, 1);
     will-change: transform;
   }
 
-  &:hover svg {
-    transform: rotate(90deg);
+  &:hover {
+
+    .spinner {
+      transform: rotate(90deg);
+    }
   }
 }
 
@@ -394,7 +398,7 @@ button {
   width: 100vw;
   height: 100vh;
   backface-visibility: hidden;
-  background: rgba(245,51,63,.9);
+  background: rgba(235,0,69,.9);
   color: $grey;
   font-size: 4em;
   font-weight: 100;
@@ -814,22 +818,24 @@ button {
 .about {
 
   .image {
+    display: flex;
     position: fixed;
     top: 0px;
     left: 0px;
+    align-items: center;
+    justify-content: center;
     width: 50vw;
     height: 100vh;
     overflow: hidden;
 
     figure {
-      width: 100%;
-      height: 100%;
-      padding: 12.5vh $unit-4;
+      width: 40vw;
+      height: 40vw;
 
       img {
         width: 100%;
         height: 100%;
-        object-fit: contain;
+        object-fit: cover;
         object-position: center;
         filter: brightness(.85);
       }
@@ -890,10 +896,6 @@ button {
         font-size: 1.2em;
         font-weight: 200;
         line-height: 1.5;
-
-        img {
-          margin: $unit-4 0px;
-        }
 
         .modal-close {
           position: absolute;
@@ -1161,13 +1163,14 @@ button {
   }
 
   .grid-wrap {
-    padding: $unit-1;
+    padding: 0;
   }
 
   .grid {
 
     .grid-item {
       width: 100%;
+      padding: $unit-4;
     }
   }
 
@@ -1204,6 +1207,12 @@ button {
     }
   }
 
+  .build {
+    .sub-menu-right {
+      display: none;
+    }
+  }
+
   .about {
 
     .image {
@@ -1211,6 +1220,11 @@ button {
       width: 100vw;
       height: 70vh;
       overflow: hidden;
+
+      figure {
+        width: 100%;
+        height: 100%;
+      }
     }
 
     .content {
@@ -1234,13 +1248,93 @@ button {
 
   .roster {
 
+    .modals {
+
+      .person {
+        display: flex;
+        position: fixed;
+        top: auto;
+        bottom: 0px;
+        left: 0px;
+        align-items: center;
+        justify-content: center;
+        width: 100vw;
+        height: 80vh;
+        padding: 0;
+        overflow: hidden;
+        backface-visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+        transition: 660ms opacity cubic-bezier(.165, .84, .44, 1);
+        will-change: opacity;
+        z-index: 100;
+
+        &.show {
+          opacity: 1;
+          pointer-events: all;
+        }
+
+        .modal-container {
+          -webkit-overflow-scrolling: touch;
+          position: relative;
+          width: 100%;
+          height: 100%;
+          max-height: 100%;
+          padding: $unit-4;
+          overflow: scroll;
+          background: rgba(235,0,69,.9);
+          color: $grey;
+          font-size: 1.2em;
+          font-weight: 200;
+          line-height: 1.5;
+
+          .modal-close {
+            position: absolute;
+            top: 0px;
+            right: 0px;
+
+            button {
+              position: relative;
+              top: 0px;
+              right: 0px;
+              width: 40px;
+              height: 40px;
+
+              .one {
+                display: block;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 100%;
+                height: 1px;
+                transform: translate3d(-50%,-50%,0) rotate(-45deg);
+                background: $grey;
+              }
+
+              .two {
+                display: block;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 100%;
+                height: 1px;
+                transform: translate3d(-50%,-50%,0) rotate(45deg);
+                background: $grey;
+              }
+            }
+          }
+        }
+      }
+    }
+
     .people {
       display: block;
-      padding: $unit-1;
+      margin: 0px;
+      padding: 0;
 
       .person {
         width: 100%;
-        margin-bottom: $unit-4;
+        padding: $unit-4;
       }
     }
 
@@ -1282,6 +1376,72 @@ button {
 
       .news-post {
         padding-right: 0;
+      }
+    }
+  }
+
+  .sub-menu-left {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    padding: 0 $unit-2;
+    overflow: scroll;
+    transform: translate3d(0, 100%, 0);
+    background: $grey;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: 660ms opacity cubic-bezier(.165, .84, .44, 1), 660ms transform cubic-bezier(.165, .84, .44, 1);
+    will-change: opacity, transform;
+    z-index: 100;
+
+    ul {
+      margin: 0px;
+    }
+
+    li {
+      display: inline-block;
+
+      &.selected {
+        button, a, label{
+          color: $black;
+        }
+      }
+    }
+
+    &.show {
+      transform: translate3d(0,0,0);
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    button, a, label {
+      display: inline-block;
+      margin: 0;
+      padding: $unit-4 $unit-2;
+      border-bottom: 0px solid transparent;
+      backface-visibility: hidden;
+      color: $red;
+      font-size: .8em;
+      line-height: 1;
+      cursor: pointer;
+      transition: 440ms color cubic-bezier(.165, .84, .44, 1);
+      will-change: color;
+
+      input {
+        display: none;
+      }
+
+      i {
+        display: none;
+      }
+
+      &:hover {
+
+        i {
+          margin-right: 0px;
+        }
       }
     }
   }
