@@ -103,17 +103,17 @@
 
 				<section class="sub-menu-left">
 					<ul>
-						<li class="mobile"><a href="<?php echo $nextPost; ?>">Next Project <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></li>
-						<li class="description-toggle"><button><i class="fa fa-question" aria-hidden="true"></i> Project Description</button></li>
-						<li class="share-toggle"><button><i class="fa fa-share" aria-hidden="true"></i> Share Project</button></li>
-						<li class="mobile"><a href="<?php echo $prevPost; ?>">Previous Project <i class="fa fa-long-arrow-left" aria-hidden="true"></i></a></li>
+						<li class="mobile"><a href="<?php echo $prevPost; ?>"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a></li>
+						<li class="description-toggle"><button><span class="not-mobile"><i class="fa fa-question" aria-hidden="true"></i> </span>Description</button></li>
+						<li class="share-toggle"><button><span class="not-mobile"><i class="fa fa-share not-mobile" aria-hidden="true"></i> </span>Share</button></li>
+						<li class="mobile"><a href="<?php echo $nextPost; ?>"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></li>
 					</ul>
 				</section>
 
 				<section class="sub-menu-right">
 					<ul>
-						<li><a href="<?php echo $nextPost; ?>">Next Project <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></li>
-						<li><a href="<?php echo $prevPost; ?>">Previous Project <i class="fa fa-long-arrow-left" aria-hidden="true"></i></a></li>
+						<li><a href="<?php echo $nextPost; ?>">Next <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></li>
+						<li><a href="<?php echo $prevPost; ?>">Previous <i class="fa fa-long-arrow-left" aria-hidden="true"></i></a></li>
 					</ul>
 				</section>
 

@@ -182,6 +182,19 @@
 					$('.next button').click(function(){ shiftSlide(-1) });
 					$('.prev button').click(function(){ shiftSlide(1) });
 
+					$(document).on("click", ".left a", function(ev){
+						ev.preventDefault();
+						shiftSlide(1);
+					});
+
+					$(document).on("click", ".right a", function(ev){
+						ev.preventDefault();
+						shiftSlide(-1);
+					});
+
+					$('.slide').eq(0).addClass("left");
+					$('.slide').eq(2).addClass("right");
+
 					// Set responsive slide width
 					$(window).resize(function() {
 						$slideWidth = $(".slide").innerWidth();
@@ -199,6 +212,9 @@
 					    }
 					    $carousel.removeClass('transition')
 							$carousel.css('transform','translateX(0px)');
+							$('.left').removeClass("left");
+							$('.slide').eq(0).addClass("left");
+							$('.slide').eq(2).addClass("right");
 					  }, 880);
 					}
 				}

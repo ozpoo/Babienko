@@ -478,6 +478,7 @@ button {
     }
 
     .next {
+      display: none;
       position: absolute;
       right: 0px;
       bottom: 0px;
@@ -486,6 +487,7 @@ button {
     }
 
     .prev {
+      display: none;
       position: absolute;
       bottom: 0px;
       left: 0px;
@@ -1153,6 +1155,9 @@ button {
     display: block;
   }
 
+  .not-mobile {
+    display: none;
+  }
 
   .header {
     background: rgba(255,255,255,1);
@@ -1205,6 +1210,59 @@ button {
   }
 
   .single {
+    .sub-menu-left {
+      -webkit-overflow-scrolling: touch;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100vw;
+      padding: 0 $unit-4;
+      overflow: scroll;
+      transform: translate3d(0, 100%, 0);
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: 660ms opacity cubic-bezier(.165, .84, .44, 1), 660ms transform cubic-bezier(.165, .84, .44, 1);
+      will-change: opacity, transform;
+      z-index: 100;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      ul {
+        display: inline-block;
+        display: flex;
+        width: 100%;
+        margin: 0px;
+        text-align: center;
+      }
+
+      li {
+        display: inline-block;
+        flex: 1;
+      }
+
+      button, a, label {
+        width: 100%;
+
+        input {
+          display: none;
+        }
+
+        i {
+          display: inline-block;
+          margin: 0px;
+        }
+
+        &:hover {
+
+          i {
+            margin-right: 0px;
+          }
+        }
+      }
+    }
     .description {
       display: flex;
       position: fixed;
@@ -1214,7 +1272,7 @@ button {
       align-items: center;
       justify-content: center;
       width: 100vw;
-      height: 80vh;
+      height: 70vh;
       padding: 0;
       overflow: hidden;
       backface-visibility: hidden;
@@ -1322,7 +1380,7 @@ button {
         align-items: center;
         justify-content: center;
         width: 100vw;
-        height: 80vh;
+        height: 70vh;
         padding: 0;
         overflow: hidden;
         backface-visibility: hidden;
@@ -1416,10 +1474,10 @@ button {
     bottom: 0;
     left: 0;
     width: 100vw;
-    padding: 0 $unit-2;
+    padding: 0 $unit-4;
     overflow: scroll;
     transform: translate3d(0, 100%, 0);
-    background: $grey;
+    background: rgba(244,243,243,.9);
     white-space: nowrap;
     opacity: 0;
     pointer-events: none;
@@ -1432,6 +1490,7 @@ button {
     }
 
     ul {
+      display: inline-block;
       margin: 0px;
     }
 
