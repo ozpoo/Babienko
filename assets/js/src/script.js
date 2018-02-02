@@ -9,9 +9,8 @@
 		});
 
 		$(window).load(function(){
-
 			init();
-
+			$(".home main, .roster main, .connect main, .connect .left").css("margin-top", $(".logo").innerHeight() + ($(".logo").position().top*2));
 		});
 
 		$(window).resize(function(){
