@@ -18,6 +18,8 @@
 		});
 
 		function init() {
+			document.addEventListener("touchstart", function(){}, true);
+			
 			$("body").addClass("ready");
 			size();
 

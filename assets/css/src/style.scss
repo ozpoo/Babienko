@@ -91,12 +91,14 @@ $unit-8: calc(48px + .8vw + .8vh);
 * {
   -webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 	box-sizing: border-box;
 	text-rendering: optimizeLegibility;
 
 	&:after, &:before {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
 		box-sizing: border-box;
 		text-rendering: optimizeLegibility;
 	}
