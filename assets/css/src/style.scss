@@ -459,16 +459,43 @@ button {
           float: left;
           cursor: pointer;
 
-          img {
-            backface-visibility: hidden;
-            filter: grayscale(100%) brightness(.85);
-            transition: 660ms filter cubic-bezier(.165, .84, .44, 1);
-            will-change: filter;
-          }
+          a {
+            display: block;
+            position: relative;
 
-          &:hover {
             img {
-              filter: grayscale(0) brightness(.85);
+              backface-visibility: hidden;
+              filter: grayscale(100%) brightness(.85);
+              transition: 660ms filter cubic-bezier(.165, .84, .44, 1);
+              will-change: filter;
+            }
+
+            .title {
+              display: flex;
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              align-items: center;
+              justify-content: center;
+              width: 10vw;
+              height: 10vw;
+              transform: translate3d(-50%,-50%,0);
+              background: rgba(235,0,69,.9);
+              color: $grey;
+              text-align: center;
+              opacity: 0;
+              z-index: 10;
+            }
+            &:hover {
+              .title {
+                backface-visibility: hidden;
+                opacity: 1;
+                transition: 660ms opacity cubic-bezier(.165, .84, .44, 1);
+                will-change: opacity;
+              }
+              img {
+                filter: grayscale(0) brightness(.85);
+              }
             }
           }
         }
@@ -650,6 +677,7 @@ button {
 
     figure a {
       display: block;
+      position: relative;
       width: 100%;
       height: 100%;
       overflow: hidden;
@@ -665,12 +693,30 @@ button {
         img {
           filter: grayscale(0%) brightness(.85);
         }
+        .title {
+          backface-visibility: hidden;
+          opacity: 1;
+          transition: 660ms opacity cubic-bezier(.165, .84, .44, 1);
+          will-change: opacity;
+        }
+      }
+      .title {
+        display: flex;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        align-items: center;
+        justify-content: center;
+        width: 10vw;
+        height: 10vw;
+        transform: translate3d(-50%,-50%,0);
+        background: rgba(235,0,69,.9);
+        color: $grey;
+        text-align: center;
+        opacity: 0;
+        z-index: 10;
       }
     }
-  }
-
-  .title {
-    display: none;
   }
 }
 
@@ -721,10 +767,6 @@ button {
         filter: brightness(.85) grayscale(0);
         transition: 1880ms filter cubic-bezier(.165, .84, .44, 1);
         will-change: filter;
-
-        &.color {
-          // filter: brightness(.85) grayscale(0);
-        }
       }
     }
   }

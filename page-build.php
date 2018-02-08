@@ -27,6 +27,9 @@
 										<source media="(min-width: 600px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'medium' )[0]; ?>">
 									  <img draggable="false" src="<?php echo wp_get_attachment_image_src( $image, 'thumb_square' )[0]; ?>">
 									</picture>
+									<div class="title">
+										<p><?php the_title(); ?></p>
+									</div>
 								</a>
 							</figure>
 						<?php endwhile; ?>
@@ -94,7 +97,7 @@
 
 			<section class="sub-menu-right">
 				<ul>
-					<li class="contact-toggle"><a href="mailto:info@studiobarc.com">info@studiobarc.com <i class="fa fa-envelope" aria-hidden="true"></i></a></li>
+					<li class="contact-toggle"><a href="mailto:contact@studiobarc.com">contact@studiobarc.com <i class="fa fa-envelope" aria-hidden="true"></i></a></li>
 				</ul>
 			</section>
 
@@ -120,6 +123,9 @@
 												<source media="(min-width: 600px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'thumb_landscape' )[0]; ?>">
 											  <img src="<?php echo wp_get_attachment_image_src( $image, 'thumb_landscape' )[0]; ?>">
 											</picture>
+											<div class="title">
+												<p><?php the_title(); ?></p>
+											</div>
 										</a>
 									</figure>
 								<?php elseif(($count+1) % 3 == 0): ?>
@@ -131,6 +137,9 @@
 												<source media="(min-width: 600px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'thumb_square' )[0]; ?>">
 											  <img src="<?php echo wp_get_attachment_image_src( $image, 'thumb_square' )[0]; ?>">
 											</picture>
+											<div class="title">
+												<p><?php the_title(); ?></p>
+											</div>
 										</a>
 									</figure>
 								<?php elseif(($count+2) % 3 == 0): ?>
@@ -142,6 +151,9 @@
 												<source media="(min-width: 600px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'thumb_portrait' )[0]; ?>">
 											  <img src="<?php echo wp_get_attachment_image_src( $image, 'thumb_portrait' )[0]; ?>">
 											</picture>
+											<div class="title">
+												<p><?php the_title(); ?></p>
+											</div>
 										</a>
 									</figure>
 								<?php endif; ?>
