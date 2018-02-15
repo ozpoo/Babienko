@@ -498,8 +498,8 @@ button {
               left: 50%;
               align-items: center;
               justify-content: center;
-              width: 10vw;
-              height: 10vw;
+              width: calc(120px + 4vw);
+              height: calc(120px + 4vw);
               transform: translate3d(-50%,-50%,0);
               background: rgba(235,0,69,.9);
               color: $grey;
@@ -728,8 +728,8 @@ button {
         left: 50%;
         align-items: center;
         justify-content: center;
-        width: 10vw;
-        height: 10vw;
+        width: calc(80px + 6vw);
+        height: calc(80px + 6vw);
         transform: translate3d(-50%,-50%,0);
         background: rgba(235,0,69,.9);
         color: $grey;
@@ -1276,6 +1276,14 @@ button {
       width: 100%;
       padding: $unit-4;
       padding-bottom: 0;
+
+      figure {
+        a {
+          .title {
+
+          }
+        }
+      }
     }
   }
 
