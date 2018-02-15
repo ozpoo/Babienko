@@ -4,13 +4,31 @@
 
 		'use strict';
 
-		$(document).ready(function(){
+		var elapsed = false;
+		var loaded = false;
 
+		$(document).ready(function(){
+			init();
+			size();
 		});
+
+		setTimeout(function() {
+      elapsed = true;
+      if(loaded) {
+				reveal();
+			}
+    }, 2200);
+
+    $(window).load(function() {
+			loaded = true;
+      if(elapsed) {
+				reveal();
+      }
+    });
 
 		$(window).load(function(){
 			init();
-			$(".home main, .roster main, .connect main, .connect .left").css("margin-top", $(".logo").innerHeight() + ($(".logo").position().top*2));
+
 		});
 
 		$(window).resize(function(){
@@ -19,10 +37,10 @@
 
 		function init() {
 			document.addEventListener("touchstart", function(){}, true);
-			
-			$("body").addClass("ready");
-			size();
+		}
 
+		function reveal() {
+			$("body").addClass("ready");
 			setTimeout(function(){
 				$(".title-fade").removeClass("show");
 			}, 1880);
@@ -33,6 +51,7 @@
 		}
 
 		function size() {
+			$(".home main, .roster main, .connect main, .connect .left").css("margin-top", $(".logo").innerHeight() + ($(".logo").position().top*2));
 			$(".title-fade, .intro").css("height", $(window).height());
 		}
 

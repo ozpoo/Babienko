@@ -224,7 +224,8 @@
 					    }
 					    $carousel.removeClass('transition')
 							$carousel.css('transform','translateX(0px)');
-							$('.left').removeClass("left");
+							$('.slide').removeClass("left");
+							$('.slide').removeClass("right");
 							$('.slide').eq(0).addClass("left");
 							$('.slide').eq(2).addClass("right");
 					  }, 880);

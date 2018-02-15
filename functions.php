@@ -10,6 +10,8 @@ if (!isset($content_width)) {
 }
 
 if (function_exists('add_theme_support')) {
+
+		add_theme_support( 'post-thumbnails' );
     add_theme_support('menus');
 
     add_image_size( 'thumb_micro', 20, 20, true );
@@ -190,5 +192,39 @@ add_filter('post_thumbnail_html', 'remove_thumbnail_dimensions', 10); // Remove 
 add_filter('image_send_to_editor', 'remove_thumbnail_dimensions', 10); // Remove width and height dynamic attributes to post images
 
 remove_filter('the_excerpt', 'wpautop'); // Remove <p> tags from Excerpt altogether
+
+add_filter( 'single_template', function ( $single_template ) {
+
+  if ( has_category( 'details' ) ) {
+      $single_template = dirname( __FILE__ ) . '/single-details.php';
+  }
+  return $single_template;
+
+}, PHP_INT_MAX, 2 );
+
+// Custom styling for ACF backend UI
+function my_acf_admin_head() {
+	?>
+	<style type="text/css">
+  /* Custom columns */
+    .acf-fields > .acf-field.half {
+      width: 50%;
+      box-sizing: border-box;
+      float: left;
+      clear: none;
+    }
+    .acf-fields > .acf-field.third {
+      width: 33.33%;
+      box-sizing: border-box;
+      float: left;
+      clear: none;
+    }
+    .acf-fields > .acf-field.no-top-border {
+      border-top: none;
+    }
+	</style>
+	<?php
+}
+add_action('acf/input/admin_head', 'my_acf_admin_head');
 
 ?>
