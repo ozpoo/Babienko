@@ -20,16 +20,12 @@
     }, 2200);
 
     $(window).load(function() {
+			$(".home main, .roster main, .connect main, .connect .left").css("margin-top", $(".logo").innerHeight() + ($(".logo").position().top*2));
 			loaded = true;
       if(elapsed) {
 				reveal();
       }
     });
-
-		$(window).load(function(){
-			init();
-
-		});
 
 		$(window).resize(function(){
 			size();
@@ -51,7 +47,6 @@
 		}
 
 		function size() {
-			$(".home main, .roster main, .connect main, .connect .left").css("margin-top", $(".logo").innerHeight() + ($(".logo").position().top*2));
 			$(".title-fade, .intro").css("height", $(window).height());
 		}
 
