@@ -22,6 +22,7 @@ if (function_exists('add_theme_support')) {
     add_image_size( 'thumb_feature_small', 1200, 800, true );
     add_image_size( 'thumb_feature_medium', 1800, 1200, true );
     add_image_size( 'thumb_feature_large', 2400, 1600, true );
+    add_image_size( 'thumb_admin', 220, "", true );
     add_image_size( 'small', 600, "", true );
     add_image_size( 'medium', 1200, "", true );
     add_image_size( 'large', 1800, "", true );
@@ -131,7 +132,7 @@ function html5wp_index($length) {
 }
 
 function html5wp_custom_post($length) {
-    return 40;
+    return 20;
 }
 
 function html5wp_excerpt($length_callback = '', $more_callback = '') {
@@ -151,7 +152,7 @@ function html5wp_excerpt($length_callback = '', $more_callback = '') {
 
 function view_article($more) {
     global $post;
-    return '... <a class="view-article" href="' . get_permalink($post->ID) . '">' . __('View Article', 'html5blank') . '</a>';
+    return '...';
 }
 
 function remove_admin_bar() {
