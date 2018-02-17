@@ -17,7 +17,7 @@
       if(loaded) {
 				reveal();
 			}
-    }, 2200);
+    }, 880);
 
     $(window).load(function() {
 			$(".home main, .roster main, .connect main, .connect .left").css("margin-top", $(".logo").innerHeight() + ($(".logo").position().top*2));
@@ -36,7 +36,9 @@
 		}
 
 		function reveal() {
-			$("body").addClass("ready");
+			$(".fade-wrap").addClass("show");
+			$(".title-fade .text").addClass("show");
+			$(".title-fade .spinner").removeClass("show");
 			setTimeout(function(){
 				$(".title-fade").removeClass("show");
 			}, 1880);

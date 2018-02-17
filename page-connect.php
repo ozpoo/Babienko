@@ -7,9 +7,7 @@
 			<section class="left">
 				<div class="container">
 					<p class="set-back">contact</p>
-
-					<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d86099.1006992123!2d-122.39720878841203!3d47.59508218322076!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54906aa2d262c0a1%3A0x4371a70c6a931ad4!2sBabienko+Architects+Pllc!5e0!3m2!1sen!2sus!4v1518677596920" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-
+					<?php echo get_field("map_embed"); ?>
 					<small>
 						<p><?php echo get_field("address"); ?></p>
 						<p>

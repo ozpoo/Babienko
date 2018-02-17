@@ -113,46 +113,69 @@ body {
 	background: $grey;
 	font-family: $main-font;
 	font-size: 12px;
-  font-size: calc(16px + .3vw);
+  font-size: calc(14px + .3vw);
   line-height: 1.4;
+}
 
-  header, main {
-    backface-visibility: hidden;
-    opacity: 0;
-    transition: 880ms opacity cubic-bezier(.165, .84, .44, 1);
+.fade-wrap {
+  backface-visibility: hidden;
+  opacity: 0;
+  transition: 660ms opacity cubic-bezier(.165, .84, .44, 1);
+  will-change: opacity;
+
+  &.show {
+    opacity: 1;
+  }
+}
+
+.title-fade {
+  backface-visibility: hidden;
+  opacity: 0;
+  transition: 660ms opacity cubic-bezier(.165, .84, .44, 1);
+  will-change: opacity;
+
+  &.show {
+    opacity: 1;
   }
 
-  &.ready {
+  .text {
+    backface-visibility: hidden;
+    opacity: 0;
+    opacity: 0;
+    transition: 660ms opacity cubic-bezier(.165, .84, .44, 1);
+    will-change: opacity;
 
-    header, main {
+    &.show {
+      opacity: 1;
+    }
+  }
+
+  .spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    backface-visibility: hidden;
+    opacity: 0;
+    transition: 660ms opacity cubic-bezier(.165, .84, .44, 1);
+    will-change: opacity;
+
+    &.show {
       opacity: 1;
     }
 
-    .title-fade {
+    span {
+      display: block;
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(255,255,255,.4); /* Light grey */
+      border-top: 4px solid white; /* Blue */
+      border-radius: 50%;
+      animation: spin 2s linear infinite;
 
-      .text {
-        opacity: 1;
-      }
-
-      .spinner {
-        position: absolute;
-        top: $unit-1;
-        left: $unit-1;
-
-        span {
-          display: block;
-          width: 40px;
-          height: 40px;
-          border: 4px solid rgba(255,255,255,.4); /* Light grey */
-          border-top: 4px solid white; /* Blue */
-          border-radius: 50%;
-          animation: spin 2s linear infinite;
-
-          @keyframes spin {
-              0% { transform: rotate(0deg); }
-              100% { transform: rotate(360deg); }
-          }
-        }
+      @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
       }
     }
   }
@@ -160,6 +183,7 @@ body {
 
 img {
 	display: block;
+  width: 100%;
 	max-width: 100%;
 }
 
@@ -462,67 +486,65 @@ button {
       position: relative;
       overflow: hidden;
 
-      .carousel {
-        position: relative;
-        top: 0;
-        left: -70vw;
-        width: 10000px;
-        backface-visibility: hidden;
-        will-change: transform;
+      .flky {
 
-        .slide {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          width: 80vw;
-          max-height: 70vh;
-          padding: 0 $unit-2;
-          float: left;
-          cursor: pointer;
+        .flickity-slider {
+          height: 100%;
 
-          a {
-            display: block;
-            position: relative;
+          .slide {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 80vw;
+            max-height: 70vh;
+            padding: 0 $unit-2;
+            float: left;
+            cursor: pointer;
 
-            img {
-              backface-visibility: hidden;
-              filter: grayscale(100%) brightness(.85);
-              transition: 660ms filter cubic-bezier(.165, .84, .44, 1);
-              will-change: filter;
-            }
+            a {
+              display: block;
+              position: relative;
 
-            .title {
-              display: flex;
-              position: absolute;
-              top: 50%;
-              left: 50%;
-              align-items: center;
-              justify-content: center;
-              width: calc(120px + 4vw);
-              height: calc(120px + 4vw);
-              transform: translate3d(-50%,-50%,0);
-              background: rgba(235,0,69,.9);
-              color: $grey;
-              text-align: center;
-              opacity: 0;
-              z-index: 10;
-            }
-            &:hover {
-              .title {
-                backface-visibility: hidden;
-                opacity: 1;
-                transition: 660ms opacity cubic-bezier(.165, .84, .44, 1);
-                will-change: opacity;
-              }
               img {
-                filter: grayscale(0) brightness(.85);
+                backface-visibility: hidden;
+                filter: grayscale(100%) brightness(.85);
+                transition: 660ms filter cubic-bezier(.165, .84, .44, 1);
+                will-change: filter;
+              }
+
+              .title {
+                display: flex;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                align-items: center;
+                justify-content: center;
+                width: calc(120px + 4vw);
+                height: calc(120px + 4vw);
+                transform: translate3d(-50%,-50%,0);
+                background: rgba(235,0,69,.9);
+                color: $grey;
+                text-align: center;
+                opacity: 0;
+                z-index: 10;
+              }
+              &:hover {
+                .title {
+                  backface-visibility: hidden;
+                  opacity: 1;
+                  transition: 660ms opacity cubic-bezier(.165, .84, .44, 1);
+                  will-change: opacity;
+                }
+                img {
+                  filter: grayscale(0) brightness(.85);
+                }
               }
             }
           }
-        }
 
-        &.transition {
-          transition: 880ms transform cubic-bezier(.165, .84, .44, 1);
+          &.transition {
+            transition: 880ms transform cubic-bezier(.165, .84, .44, 1);
+          }
         }
       }
     }
@@ -824,7 +846,6 @@ button {
       overflow: scroll;
       background: rgba(235,0,69,.9);
       color: $grey;
-      font-size: 1.2em;
       font-weight: 200;
       line-height: 1.5;
 
@@ -887,6 +908,13 @@ button {
 }
 
 .about {
+  .header {
+    .logo {
+      .st0 {
+        fill: $grey;
+      }
+    }
+  }
 
   .image {
     display: flex;
@@ -900,8 +928,6 @@ button {
     overflow: hidden;
 
     figure {
-      width: 40vw;
-      height: 40vw;
 
       img {
         width: 100%;
@@ -918,7 +944,6 @@ button {
     margin-left: 50vw;
     padding: 12.5vh $unit-4;
     padding-right: 0px;
-    font-size: 1.2em;
     line-height: 1.5;
 
     p, h1 {
@@ -964,7 +989,6 @@ button {
         overflow: scroll;
         background: rgba(235,0,69,.9);
         color: $grey;
-        font-size: 1.2em;
         font-weight: 200;
         line-height: 1.5;
 
@@ -1021,6 +1045,10 @@ button {
       width: 33.33%;
       margin-bottom: $unit-4;
 
+      .name {
+        white-space: nowrap;
+      }
+
       button {
 
         img {
@@ -1070,7 +1098,6 @@ button {
     overflow: scroll;
     background: rgba(235,0,69,.9);
     color: $grey;
-    font-size: 1.2em;
     font-weight: 200;
     line-height: 1.5;
     text-align: center;
@@ -1218,6 +1245,14 @@ button {
 
 .mobile {
   display: none;
+}
+
+@media only screen and (max-width: 1024px) {
+  .roster {
+    .people {
+      margin: 0 4vw;
+    }
+  }
 }
 
 @media only screen and (max-width: 680px) {
@@ -1383,7 +1418,6 @@ button {
         overflow: scroll;
         background: rgba(235,0,69,.9);
         color: $grey;
-        font-size: 1.2em;
         font-weight: 200;
         line-height: 1.5;
       }
@@ -1439,7 +1473,6 @@ button {
       margin-left: 0vw;
       padding: $unit-2;
       padding-right: 0px;
-      font-size: 1.2em;
       line-height: 1.5;
     }
 
@@ -1491,7 +1524,6 @@ button {
           overflow: scroll;
           background: rgba(235,0,69,.9);
           color: $grey;
-          font-size: 1.2em;
           font-weight: 200;
           line-height: 1.5;
         }

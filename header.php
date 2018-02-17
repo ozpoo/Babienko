@@ -21,20 +21,28 @@
 		<meta name="twitter:card" content="summary_large_image">
 
 		<?php wp_head(); ?>
-		<script>
-      // conditionizr.com
-      // configure environment tests
-      conditionizr.config({
-          assets: '<?php echo get_template_directory_uri(); ?>',
-          tests: {}
-      });
-    </script>
+		
 		<script>
 				document.createElement( "picture" );
 		</script>
 
 	</head>
 	<body <?php body_class(); ?>>
+
+		<section class="title-fade show">
+			<div class="spinner show">
+				<p><span></span></p>
+			</div>
+			<div class="text">
+				<?php if(is_front_page()): ?>
+					babienko
+				<?php else: ?>
+					<?php echo strtolower(get_the_title()); ?>
+				<?php endif; ?>
+			</div>
+		</section>
+
+		<section class="fade-wrap">
 
 			<header>
 
@@ -155,16 +163,3 @@
 				</section>
 
 			</header>
-
-			<section class="title-fade show">
-				<div class="spinner">
-					<p><span></span></p>
-				</div>
-				<div class="text">
-					<?php if(is_front_page()): ?>
-						babienko
-					<?php else: ?>
-						<?php echo strtolower(get_the_title()); ?>
-					<?php endif; ?>
-				</div>
-			</section>

@@ -6,7 +6,7 @@
 
 			<section class="wrap">
 			  <div class="window">
-			    <div class="carousel">
+			    <div class="flky">
 						<?php
 							$args = array(
 						    'post_type'				=> 'build',
@@ -22,10 +22,10 @@
 								<a href="<?php the_permalink(); ?>">
 									<picture>
 										<?php $image = get_field( "home_feature_slider_image" ); ?>
-										<source media="(min-width: 2000px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'x-large' )[0]; ?>">
+										<!-- <source media="(min-width: 2000px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'x-large' )[0]; ?>">
 									  <source media="(min-width: 1600px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'large' )[0]; ?>">
-										<source media="(min-width: 600px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'medium' )[0]; ?>">
-									  <img draggable="false" src="<?php echo wp_get_attachment_image_src( $image, 'thumb_square' )[0]; ?>">
+										<source media="(min-width: 600px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'medium' )[0]; ?>"> -->
+									  <img draggable="false" data-flickity-lazyload="<?php echo wp_get_attachment_image_src( $image, 'large' )[0]; ?>">
 									</picture>
 									<div class="title">
 										<p><?php the_title(); ?></p>
@@ -119,9 +119,12 @@
 									<figure>
 										<a href="<?php the_permalink(); ?>">
 											<picture>
-											  <source media="(min-width: 1800px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'thumb_landscape' )[0]; ?>">
-												<source media="(min-width: 600px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'thumb_landscape' )[0]; ?>">
-											  <img src="<?php echo wp_get_attachment_image_src( $image, 'thumb_landscape' )[0]; ?>">
+											  <!-- <source media="(min-width: 1800px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'thumb_landscape' )[0]; ?>">
+												<source media="(min-width: 600px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'thumb_landscape' )[0]; ?>"> -->
+											  <img
+													class="lazy"
+													data-src="<?php echo wp_get_attachment_image_src( $image, 'thumb_landscape' )[0]; ?>"
+													src="<?php echo wp_get_attachment_image_src( $image, 'thumb_landscape_micro' )[0]; ?>">
 											</picture>
 											<div class="title">
 												<p><?php the_title(); ?></p>
@@ -133,9 +136,12 @@
 									<figure>
 										<a href="<?php the_permalink(); ?>">
 											<picture>
-											  <source media="(min-width: 1800px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'thumb_square' )[0]; ?>">
-												<source media="(min-width: 600px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'thumb_square' )[0]; ?>">
-											  <img src="<?php echo wp_get_attachment_image_src( $image, 'thumb_square' )[0]; ?>">
+											  <!-- <source media="(min-width: 1800px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'thumb_square' )[0]; ?>">
+												<source media="(min-width: 600px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'thumb_square' )[0]; ?>"> -->
+											  <img
+													class="lazy"
+													data-src="<?php echo wp_get_attachment_image_src( $image, 'thumb_square' )[0]; ?>"
+													src="<?php echo wp_get_attachment_image_src( $image, 'thumb_square_micro' )[0]; ?>">
 											</picture>
 											<div class="title">
 												<p><?php the_title(); ?></p>
@@ -147,9 +153,12 @@
 									<figure>
 										<a href="<?php the_permalink(); ?>">
 											<picture>
-											  <source media="(min-width: 1800px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'thumb_portrait' )[0]; ?>">
-												<source media="(min-width: 600px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'thumb_portrait' )[0]; ?>">
-											  <img src="<?php echo wp_get_attachment_image_src( $image, 'thumb_portrait' )[0]; ?>">
+											  <!-- <source media="(min-width: 1800px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'thumb_portrait' )[0]; ?>">
+												<source media="(min-width: 600px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'thumb_portrait' )[0]; ?>"> -->
+											  <img
+													class="lazy"
+													data-src="<?php echo wp_get_attachment_image_src( $image, 'thumb_portrait' )[0]; ?>"
+													src="<?php echo wp_get_attachment_image_src( $image, 'thumb_portrait_micro' )[0]; ?>">
 											</picture>
 											<div class="title">
 												<p><?php the_title(); ?></p>
@@ -176,6 +185,7 @@
 
 				$(window).load(function() {
 					init();
+					lazyLoad();
 				});
 
 			 var init = function(time) {
@@ -185,51 +195,108 @@
  				}
 
 				 var initCarousel = function() {
+
+					 var flky = new Flickity( '.flky', {
+ 						accessibility: true,
+ 						adaptiveHeight: true,
+ 						autoPlay: false,
+ 						cellAlign: 'center',
+ 						cellSelector: undefined,
+ 						contain: false,
+ 						draggable: false,
+ 						dragThreshold: 3,
+ 						freeScroll: false,
+ 						selectedAttraction: 0.1,
+ 						friction: 1,
+ 						groupCells: false,
+ 						initialIndex: 1,
+ 						lazyLoad: 1,
+ 						percentPosition: true,
+ 						prevNextButtons: false,
+ 						pageDots: true,
+ 						resize: true,
+ 						rightToLeft: false,
+ 						setGallerySize: true,
+ 						watchCSS: false,
+ 						wrapAround: true
+ 					});
+
+ 					$(".project a").on("click", function(ev){
+ 		        ev.preventDefault();
+ 						var el = $(this).closest(".project");
+ 						var projects = $(".project ");
+ 						var length = flky.slides.length;
+ 						var current = flky.selectedIndex;
+ 						var next = $(projects).index($(el));
+
+ 						if(next == current) {
+							window.location.href = $(this).attr("href");
+ 							// Special case
+ 						} else if(current == 0) {
+ 							if(next == (length-1)) {
+ 								flky.previous();
+ 							} else {
+ 								flky.next();
+ 							}
+ 							// Special case
+ 						} else if(current == (length-1)) {
+ 							if(next == 0 ) {
+ 								flky.next();
+ 							} else {
+ 								flky.previous();
+ 							}
+ 						} else if(next < current) {
+ 							flky.previous();
+ 						} else if(next > current) {
+ 							flky.next();
+ 						}
+ 			    });
+
 					 // Set varialbes
-					 var $carousel, $threshold, $slideWidth, $dragStart, $dragEnd;
-					 $carousel = $('.carousel');
-					 $threshold = 150;
-					 $slideWidth = $(".slide").innerWidth();
-
-					$('.next button').click(function(){ shiftSlide(-1) });
-					$('.prev button').click(function(){ shiftSlide(1) });
-
-					$(document).on("click", ".left a", function(ev){
-						ev.preventDefault();
-						shiftSlide(1);
-					});
-
-					$(document).on("click", ".right a", function(ev){
-						ev.preventDefault();
-						shiftSlide(-1);
-					});
-
-					$('.slide').eq(0).addClass("left");
-					$('.slide').eq(2).addClass("right");
-
-					// Set responsive slide width
-					$(window).resize(function() {
-						$slideWidth = $(".slide").innerWidth();
-					});
-
-					function shiftSlide(direction) {
-					  if ($carousel.hasClass('transition')) return;
-					  $dragEnd = $dragStart;
-					  $carousel.addClass('transition').css('transform','translateX(' + (direction * $slideWidth) + 'px)');
-					  setTimeout(function(){
-					    if (direction === 1) {
-					      $('.slide:first').before($('.slide:last'));
-					    } else if (direction === -1) {
-					      $('.slide:last').after($('.slide:first'));
-					    }
-					    $carousel.removeClass('transition')
-							$carousel.css('transform','translateX(0px)');
-							$('.slide').removeClass("left");
-							$('.slide').removeClass("right");
-							$('.slide').eq(0).addClass("left");
-							$('.slide').eq(2).addClass("right");
-					  }, 880);
-					}
+					//  var $carousel, $threshold, $slideWidth, $dragStart, $dragEnd;
+					//  $carousel = $('.carousel');
+					//  $threshold = 150;
+					//  $slideWidth = $(".slide").innerWidth();
+					//
+					// $('.next button').click(function(){ shiftSlide(-1) });
+					// $('.prev button').click(function(){ shiftSlide(1) });
+					//
+					// $(document).on("click", ".left a", function(ev){
+					// 	ev.preventDefault();
+					// 	shiftSlide(1);
+					// });
+					//
+					// $(document).on("click", ".right a", function(ev){
+					// 	ev.preventDefault();
+					// 	shiftSlide(-1);
+					// });
+					//
+					// $('.slide').eq(0).addClass("left");
+					// $('.slide').eq(2).addClass("right");
+					//
+					// // Set responsive slide width
+					// $(window).resize(function() {
+					// 	$slideWidth = $(".slide").innerWidth();
+					// });
+					//
+					// function shiftSlide(direction) {
+					//   if ($carousel.hasClass('transition')) return;
+					//   $dragEnd = $dragStart;
+					//   $carousel.addClass('transition').css('transform','translateX(' + (direction * $slideWidth) + 'px)');
+					//   setTimeout(function(){
+					//     if (direction === 1) {
+					//       $('.slide:first').before($('.slide:last'));
+					//     } else if (direction === -1) {
+					//       $('.slide:last').after($('.slide:first'));
+					//     }
+					//     $carousel.removeClass('transition')
+					// 		$carousel.css('transform','translateX(0px)');
+					// 		$('.slide').removeClass("left");
+					// 		$('.slide').removeClass("right");
+					// 		$('.slide').eq(0).addClass("left");
+					// 		$('.slide').eq(2).addClass("right");
+					//   }, 880);
+					// }
 				}
 
 				var initMasonry = function() {
@@ -267,6 +334,77 @@
 										 window.setTimeout(callback, 1000 / 60);
 								 };
 				 })();
+
+			  var $q = function(q, res){
+			        if (document.querySelectorAll) {
+			          res = document.querySelectorAll(q);
+			        } else {
+			          var d=document
+			            , a=d.styleSheets[0] || d.createStyleSheet();
+			          a.addRule(q,'f:b');
+			          for(var l=d.all,b=0,c=[],f=l.length;b<f;b++)
+			            l[b].currentStyle.f && c.push(l[b]);
+
+			          a.removeRule(0);
+			          res = c;
+			        }
+			        return res;
+			      }
+			    , addEventListener = function(evt, fn){
+			        window.addEventListener
+			          ? this.addEventListener(evt, fn, false)
+			          : (window.attachEvent)
+			            ? this.attachEvent('on' + evt, fn)
+			            : this['on' + evt] = fn;
+			      }
+			    , _has = function(obj, key) {
+			        return Object.prototype.hasOwnProperty.call(obj, key);
+			      }
+			    ;
+
+			  function loadImage (el, fn) {
+			    var img = new Image()
+			      , src = el.getAttribute('data-src');
+			    img.onload = function() {
+			      if (!! el.parent)
+			        el.parent.replaceChild(img, el)
+			      else
+			        el.src = src;
+
+			      fn? fn() : null;
+			    }
+			    img.src = src;
+			  }
+
+			  function elementInViewport(el) {
+			    var rect = el.getBoundingClientRect()
+
+			    return (
+			       rect.top    >= 0
+			    && rect.left   >= 0
+			    && rect.top <= (window.innerHeight || document.documentElement.clientHeight)
+			    )
+			  }
+
+			    var images = new Array()
+			      , query = $q('img.lazy')
+			      , processScroll = function(){
+			          for (var i = 0; i < images.length; i++) {
+			            if (elementInViewport(images[i])) {
+			              loadImage(images[i], function () {
+			                images.splice(i, i);
+			              });
+			            }
+			          };
+			        }
+			      ;
+			    // Array.prototype.slice.call is not callable under our lovely IE8
+			    for (var i = 0; i < query.length; i++) {
+			      images.push(query[i]);
+			    };
+
+			    processScroll();
+			    addEventListener('scroll',processScroll);
 
 			});
 

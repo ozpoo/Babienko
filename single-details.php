@@ -132,7 +132,7 @@
 					init();
 					setTimeout(function(){
 						$(".sub-menu, .sub-menu-left, .sub-menu-middle, .sub-menu-right").addClass("show");
-					}, 4200);
+					}, 2400);
 				});
 
 				var init = function(time) {
