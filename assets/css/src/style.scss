@@ -953,87 +953,7 @@ button {
   }
 }
 
-.roster {
-
-  .modals {
-
-    .person {
-      display: flex;
-      position: fixed;
-      top: 0px;
-      left: 0px;
-      align-items: center;
-      justify-content: center;
-      width: 100vw;
-      height: 100vh;
-      padding: 0;
-      overflow: hidden;
-      backface-visibility: hidden;
-      opacity: 0;
-      pointer-events: none;
-      transition: 660ms opacity cubic-bezier(.165, .84, .44, 1);
-      will-change: opacity;
-      z-index: 100;
-
-      &.show {
-        opacity: 1;
-        pointer-events: all;
-      }
-
-      .modal-container {
-        -webkit-overflow-scrolling: touch;
-        position: relative;
-        width: 50vw;
-        max-height: 80%;
-        padding: $unit-4;
-        overflow: scroll;
-        background: rgba(235,0,69,.9);
-        color: $grey;
-        font-weight: 200;
-        line-height: 1.5;
-
-        &::-webkit-scrollbar {
-          display: none;
-        }
-
-        .modal-close {
-          position: absolute;
-          top: 0px;
-          right: 0px;
-
-          button {
-            position: relative;
-            top: 0px;
-            right: 0px;
-            width: 40px;
-            height: 40px;
-
-            .one {
-              display: block;
-              position: absolute;
-              top: 50%;
-              left: 50%;
-              width: 100%;
-              height: 1px;
-              transform: translate3d(-50%,-50%,0) rotate(-45deg);
-              background: $grey;
-            }
-
-            .two {
-              display: block;
-              position: absolute;
-              top: 50%;
-              left: 50%;
-              width: 100%;
-              height: 1px;
-              transform: translate3d(-50%,-50%,0) rotate(45deg);
-              background: $grey;
-            }
-          }
-        }
-      }
-    }
-  }
+.post-type-archive-roster {
 
   .people {
     display: flex;
@@ -1061,6 +981,83 @@ button {
         &:hover {
           img {
             filter: grayscale(0);
+          }
+        }
+      }
+
+      .modal {
+        display: flex;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        align-items: center;
+        justify-content: center;
+        width: 100vw;
+        height: 100vh;
+        padding: 0;
+        overflow: hidden;
+        backface-visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+        transition: 660ms opacity cubic-bezier(.165, .84, .44, 1);
+        will-change: opacity;
+        z-index: 100;
+
+        &.show {
+          opacity: 1;
+          pointer-events: all;
+        }
+
+        .content {
+          -webkit-overflow-scrolling: touch;
+          position: relative;
+          width: 50vw;
+          max-height: 80%;
+          padding: $unit-4;
+          overflow: scroll;
+          background: rgba(235,0,69,.9);
+          color: $grey;
+          font-weight: 200;
+          line-height: 1.5;
+
+          &::-webkit-scrollbar {
+            display: none;
+          }
+
+          .modal-close {
+            position: absolute;
+            top: 0px;
+            right: 0px;
+
+            button {
+              position: relative;
+              top: 0px;
+              right: 0px;
+              width: 40px;
+              height: 40px;
+
+              .one {
+                display: block;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 100%;
+                height: 1px;
+                transform: translate3d(-50%,-50%,0) rotate(-45deg);
+                background: $grey;
+              }
+
+              .two {
+                display: block;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 100%;
+                height: 1px;
+                transform: translate3d(-50%,-50%,0) rotate(45deg);
+                background: $grey;
+              }
+            }
           }
         }
       }

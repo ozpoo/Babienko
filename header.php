@@ -21,7 +21,7 @@
 		<meta name="twitter:card" content="summary_large_image">
 
 		<?php wp_head(); ?>
-		
+
 		<script>
 				document.createElement( "picture" );
 		</script>
@@ -36,6 +36,8 @@
 			<div class="text">
 				<?php if(is_front_page()): ?>
 					babienko
+				<?php elseif(is_post_type_archive('roster')): ?>
+					roster
 				<?php else: ?>
 					<?php echo strtolower(get_the_title()); ?>
 				<?php endif; ?>
