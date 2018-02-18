@@ -104,9 +104,11 @@
 			<section class="grid-wrap">
 				<div class="grid">
 					<?php
+						$paged = ( get_query_var('page') ) ? get_query_var('page') : 1;
 						$args = array(
 							'post_type'				=> 'build',
-							'posts_per_page'	=> -1
+							'posts_per_page'	=> -1,
+							'paged' => $paged
 					    );
 						$the_query = new WP_Query( $args );
 					?>
@@ -169,9 +171,27 @@
 							</div>
 						<?php $count++; ?>
 					<?php endwhile; ?>
-					<?php wp_reset_query(); ?>
 				</div>
 			</section>
+
+			<?php
+				$total = $the_query->max_num_pages;
+				if ( $total > 1 )  {
+					if ( !$current_page = get_query_var('paged') ) {
+						$current_page = 1;
+					}
+					$format = 'page/%#%/';
+					echo paginate_links(array(
+						'base'     => get_pagenum_link(1) . '%_%',
+						'format'   => $format,
+						'current'  => $current_page,
+						'total'    => $total,
+						'mid_size' => 4,
+						'type'     => 'list'
+					));
+				}
+			?>
+			<?php wp_reset_query(); ?>
 
 		</section>
 
