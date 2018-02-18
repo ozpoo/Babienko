@@ -1211,6 +1211,10 @@ button {
 
     .more-toggle {
       border-bottom: 1px solid $black;
+
+      &:hover {
+        border-bottom-color: transparent;
+      }
     }
 
     p {
