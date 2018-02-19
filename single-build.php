@@ -73,9 +73,9 @@
 					<figure>
 						<picture>
 							<?php $image = get_field( "single_project_hero" ); ?>
-						  <source media="(min-width: 1800px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'large' )[0]; ?>">
-							<source media="(min-width: 600px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'medium' )[0]; ?>">
-						  <img src="<?php echo wp_get_attachment_image_src( $image, 'small' )[0]; ?>">
+						  <source media="(min-width: 1800px)" srcset="<?php echo $image['sizes']['large']; ?>">
+							<source media="(min-width: 600px)" srcset="<?php echo $image['sizes']['medium']; ?>">
+						  <img src="<?php echo $image['sizes']['small']; ?>">
 						</picture>
 					</figure>
 				</section>
@@ -122,12 +122,10 @@
 	        <?php foreach( $images as $image ): ?>
 						<figure>
 							<picture>
-							  <!-- <source media="(min-width: 1800px)" srcset="<?php echo wp_get_attachment_image_src( $image['ID'], 'large' )[0]; ?>">
-								<source media="(min-width: 600px)" srcset="<?php echo wp_get_attachment_image_src( $image['ID'], 'medium' )[0]; ?>"> -->
 							  <img
 									class="lazy"
-									data-src="<?php echo wp_get_attachment_image_src( $image['ID'], 'large' )[0]; ?>"
-									src="<?php echo wp_get_attachment_image_src( $image['ID'], 'micro' )[0]; ?>">
+									data-src="<?php echo $image['sizes']['large']; ?>"
+									src="<?php echo $image['sizes']['micro']; ?>">
 							</picture>
 						</figure>
 	        <?php endforeach; ?>

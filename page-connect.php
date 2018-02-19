@@ -62,10 +62,9 @@
 						<p class="title"><?php echo $title; ?></p>
 						<p>
 							<picture>
-								<source media="(min-width: 1800px)" srcset="<?php echo wp_get_attachment_image_src( $thumb, 'large' )[0]; ?>">
-								<source media="(min-width: 1000px)" srcset="<?php echo wp_get_attachment_image_src( $thumb, 'medium' )[0]; ?>">
-								<source media="(min-width: 600px)" srcset="<?php echo wp_get_attachment_image_src( $thumb, 'small' )[0]; ?>">
-								<img src="<?php echo wp_get_attachment_image_src( $thumb, 'medium' )[0]; ?>">
+								<source media="(min-width: 1000px)" srcset="<?php echo get_the_post_thumbnail_url(get_the_ID(),'medium'); ?>">
+								<source media="(min-width: 600px)" srcset="<?php echo get_the_post_thumbnail_url(get_the_ID(),'small'); ?>">
+								<img src="<?php echo get_the_post_thumbnail_url(get_the_ID(),'medium'); ?>">
 							</picture>
 						</p>
 						<?php if(get_field("url")): ?>

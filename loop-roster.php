@@ -12,7 +12,7 @@
 					<button>
 						<picture>
 							<?php $thumb = get_post_thumbnail_id(); ?>
-							<img src="<?php echo wp_get_attachment_image_src( $thumb, 'thumb_square' )[0]; ?>">
+							<img src="<?php echo get_the_post_thumbnail_url(get_the_ID(),'thumb_square'); ?>">
 						</picture>
 					</button>
 				</p>

@@ -22,10 +22,7 @@
 								<a href="<?php the_permalink(); ?>">
 									<picture>
 										<?php $image = get_field( "home_feature_slider_image" ); ?>
-										<!-- <source media="(min-width: 2000px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'x-large' )[0]; ?>">
-									  <source media="(min-width: 1600px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'large' )[0]; ?>">
-										<source media="(min-width: 600px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'medium' )[0]; ?>"> -->
-									  <img draggable="false" data-flickity-lazyload="<?php echo wp_get_attachment_image_src( $image, 'large' )[0]; ?>">
+									  <img draggable="false" data-flickity-lazyload="<?php echo $image['sizes']['large']; ?>">
 									</picture>
 									<div class="title">
 										<p><?php the_title(); ?></p>
@@ -121,12 +118,10 @@
 									<figure>
 										<a href="<?php the_permalink(); ?>">
 											<picture>
-											  <!-- <source media="(min-width: 1800px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'thumb_landscape' )[0]; ?>">
-												<source media="(min-width: 600px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'thumb_landscape' )[0]; ?>"> -->
 											  <img
 													class="lazy"
-													data-src="<?php echo wp_get_attachment_image_src( $image, 'thumb_landscape' )[0]; ?>"
-													src="<?php echo wp_get_attachment_image_src( $image, 'thumb_landscape_micro' )[0]; ?>">
+													data-src="<?php echo $image['sizes']['thumb_landscape']; ?>"
+													src="<?php echo $image['sizes']['thumb_landscape_micro']; ?>">
 											</picture>
 											<div class="title">
 												<p><?php the_title(); ?></p>
@@ -138,12 +133,10 @@
 									<figure>
 										<a href="<?php the_permalink(); ?>">
 											<picture>
-											  <!-- <source media="(min-width: 1800px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'thumb_square' )[0]; ?>">
-												<source media="(min-width: 600px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'thumb_square' )[0]; ?>"> -->
 											  <img
 													class="lazy"
-													data-src="<?php echo wp_get_attachment_image_src( $image, 'thumb_square' )[0]; ?>"
-													src="<?php echo wp_get_attachment_image_src( $image, 'thumb_square_micro' )[0]; ?>">
+													data-src="<?php echo $image['sizes']['thumb_square']; ?>"
+													src="<?php echo $image['sizes']['thumb_square_micro']; ?>">
 											</picture>
 											<div class="title">
 												<p><?php the_title(); ?></p>
@@ -155,12 +148,10 @@
 									<figure>
 										<a href="<?php the_permalink(); ?>">
 											<picture>
-											  <!-- <source media="(min-width: 1800px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'thumb_portrait' )[0]; ?>">
-												<source media="(min-width: 600px)" srcset="<?php echo wp_get_attachment_image_src( $image, 'thumb_portrait' )[0]; ?>"> -->
 											  <img
 													class="lazy"
-													data-src="<?php echo wp_get_attachment_image_src( $image, 'thumb_portrait' )[0]; ?>"
-													src="<?php echo wp_get_attachment_image_src( $image, 'thumb_portrait_micro' )[0]; ?>">
+													data-src="<?php echo $image['sizes']['thumb_portrait']; ?>"
+													src="<?php echo $image['sizes']['thumb_portrait_micro']; ?>">
 											</picture>
 											<div class="title">
 												<p><?php the_title(); ?></p>

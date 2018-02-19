@@ -7,10 +7,9 @@
 			<section class="image">
 				<figure>
 					<picture>
-						<?php $thumb = get_post_thumbnail_id(); ?>
-						<source media="(min-width: 1800px)" srcset="<?php echo wp_get_attachment_image_src( $thumb, 'large' )[0]; ?>">
-						<source media="(min-width: 600px)" srcset="<?php echo wp_get_attachment_image_src( $thumb, 'medium' )[0]; ?>">
-						<img src="<?php echo wp_get_attachment_image_src( $thumb, 'medium' )[0]; ?>">
+						<source media="(min-width: 1800px)" srcset="<?php echo get_the_post_thumbnail_url(get_the_ID(),'large'); ?>">
+						<source media="(min-width: 600px)" srcset="<?php echo get_the_post_thumbnail_url(get_the_ID(),'medium'); ?>">
+						<img src="<?php echo get_the_post_thumbnail_url(get_the_ID(),'medium'); ?>">
 					</picture>
 				</figure>
 			</section>
