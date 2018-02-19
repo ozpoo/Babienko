@@ -261,49 +261,75 @@
 			      }
 			    ;
 
-			  function loadImage (el, fn) {
-			    var img = new Image()
-			      , src = el.getAttribute('data-src');
-			    img.onload = function() {
-			      if (!! el.parent)
-			        el.parent.replaceChild(img, el)
-			      else
-			        el.src = src;
+					function loadImage (el, fn) {
+						if(!hasClass(el, "lazyLoading")) {
+					    var img = new Image();
+					    var src = el.getAttribute('data-src');
 
-			      fn? fn() : null;
-			    }
-			    img.src = src;
-			  }
+					    img.onload = function() {
+					      if (!! el.parent) {
+					        el.parent.replaceChild(img, el);
+					      } else {
+					        el.src = src;
+									removeClass(el, "lazyLoading");
+									el.className += " lazyLoaded";
+									remove(images, el);
+								}
 
-			  function elementInViewport(el) {
-			    var rect = el.getBoundingClientRect()
+					      fn? fn() : null;
+					    }
+					    img.src = src;
+							el.className += " lazyLoading";
+						}
+				  }
 
-			    return (
-			       rect.top    >= 0
-			    && rect.left   >= 0
-			    && rect.top <= (window.innerHeight || document.documentElement.clientHeight)
-			    )
-			  }
+				  function elementInViewport(el) {
+				    var rect = el.getBoundingClientRect()
 
-			    var images = new Array()
-			      , query = $q('img.lazy')
-			      , processScroll = function(){
-			          for (var i = 0; i < images.length; i++) {
-			            if (elementInViewport(images[i])) {
-			              loadImage(images[i], function () {
-			                images.splice(i, i);
-			              });
-			            }
-			          };
+				    return (
+				       rect.top    >= 0
+				    && rect.left   >= 0
+				    && rect.top <= (window.innerHeight || document.documentElement.clientHeight)
+				    )
+				  }
+
+				    var images = new Array()
+				      , query = $q('img.lazy')
+				      , processScroll = function(){
+				          for (var i = 0; i < images.length; i++) {
+				            if (elementInViewport(images[i])) {
+				              loadImage(images[i], function () {
+				                images.splice(i, i);
+				              });
+				            }
+				          };
+				        }
+				      ;
+				    // Array.prototype.slice.call is not callable under our lovely IE8
+				    for (var i = 0; i < query.length; i++) {
+				      images.push(query[i]);
+				    };
+
+				    processScroll();
+				    addEventListener('scroll',processScroll);
+
+						function hasClass(el, cls) {
+					    return (' ' + el.className + ' ').indexOf(' ' + cls + ' ') > -1;
+						}
+
+						function removeClass(el, cls) {
+			        if(hasClass(el, cls)) {
+		            var reg = new RegExp('(\\s|^)'+cls+'(\\s|$)');
+		            el.className = el.className.replace(reg,' ');
 			        }
-			      ;
-			    // Array.prototype.slice.call is not callable under our lovely IE8
-			    for (var i = 0; i < query.length; i++) {
-			      images.push(query[i]);
-			    };
+				    }
 
-			    processScroll();
-			    addEventListener('scroll',processScroll);
+						function remove(array, element) {
+					    const index = array.indexOf(element);
+					    if (index !== -1) {
+				        array.splice(index, 1);
+					    }
+						}
 
 			});
 

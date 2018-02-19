@@ -76,7 +76,9 @@ strong, b {
 }
 
 $main-font: "Sofia Pro", Helvetica, sans-serif;
-$red: rgba(235,0,69,1);
+// $red: rgba(235,0,69,1);
+$red: rgba(245,51,63,1);
+$red-o: rgba(245,51,63,.9);
 $black: #191919;
 $grey: #f4f3f2;
 $unit-1: calc( 6px + .2vw + .2vh);
@@ -125,6 +127,44 @@ body {
 
   &.show {
     opacity: 1;
+  }
+}
+
+img {
+
+  &.lazy {
+    position: relative;
+
+    &:after {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate3d(-50%, -50%, 0);
+      backface-visibility: hidden;
+      content: '';
+      opacity: 0;
+      transition: 660ms opacity cubic-bezier(.165, .84, .44, 1);
+      will-change: opacity;
+
+      &.show {
+        opacity: 1;
+      }
+
+      span {
+        display: block;
+        width: 40px;
+        height: 40px;
+        border: 4px solid rgba(255,255,255,.4); /* Light grey */
+        border-top: 4px solid white; /* Blue */
+        border-radius: 50%;
+        animation: spin 2s linear infinite;
+
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+      }
+    }
   }
 }
 
@@ -445,7 +485,7 @@ button {
   width: 100vw;
   height: 100vh;
   backface-visibility: hidden;
-  background: rgba(235,0,69,.9);
+  background: $red-o;
   color: $grey;
   font-size: 4em;
   font-weight: 100;
@@ -522,7 +562,7 @@ button {
                 width: calc(120px + 4vw);
                 height: calc(120px + 4vw);
                 transform: translate3d(-50%,-50%,0);
-                background: rgba(235,0,69,.9);
+                background: $red-o;
                 color: $grey;
                 text-align: center;
                 opacity: 0;
@@ -753,7 +793,7 @@ button {
         width: calc(80px + 6vw);
         height: calc(80px + 6vw);
         transform: translate3d(-50%,-50%,0);
-        background: rgba(235,0,69,.9);
+        background: $red-o;
         color: $grey;
         text-align: center;
         opacity: 0;
@@ -844,7 +884,7 @@ button {
       max-height: 100%;
       padding: $unit-4;
       overflow: scroll;
-      background: rgba(235,0,69,.9);
+      background: $red-o;
       color: $grey;
       font-weight: 200;
       line-height: 1.5;
@@ -1015,7 +1055,7 @@ button {
           max-height: 80%;
           padding: $unit-4;
           overflow: scroll;
-          background: rgba(235,0,69,.9);
+          background: $red-o;
           color: $grey;
           font-weight: 200;
           line-height: 1.5;
@@ -1093,7 +1133,7 @@ button {
     max-height: 100%;
     padding: 10vh 10vw;
     overflow: scroll;
-    background: rgba(235,0,69,.9);
+    background: $red-o;
     color: $grey;
     font-weight: 200;
     line-height: 1.5;
@@ -1417,7 +1457,7 @@ button {
         max-height: 100%;
         padding: $unit-4;
         overflow: scroll;
-        background: rgba(235,0,69,.9);
+        background: $red-o;
         color: $grey;
         font-weight: 200;
         line-height: 1.5;
@@ -1533,7 +1573,7 @@ button {
             max-height: 100%;
             padding: $unit-4;
             overflow: scroll;
-            background: rgba(235,0,69,.9);
+            background: $red-o;
             color: $grey;
             font-weight: 200;
             line-height: 1.5;
@@ -1658,7 +1698,7 @@ button {
 }
 
 ::selection {
-	background: rgba(235,0,69,.9);
+	background: $red;
 	color: $grey;
 	text-shadow: none;
 }

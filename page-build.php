@@ -205,7 +205,6 @@
 
 				$(window).load(function() {
 					init();
-					lazyLoad();
 				});
 
 			 var init = function(time) {
@@ -383,17 +382,25 @@
 			    ;
 
 			  function loadImage (el, fn) {
-			    var img = new Image()
-			      , src = el.getAttribute('data-src');
-			    img.onload = function() {
-			      if (!! el.parent)
-			        el.parent.replaceChild(img, el)
-			      else
-			        el.src = src;
+					if(!hasClass(el, "lazyLoading")) {
+				    var img = new Image();
+				    var src = el.getAttribute('data-src');
 
-			      fn? fn() : null;
-			    }
-			    img.src = src;
+				    img.onload = function() {
+				      if (!! el.parent) {
+				        el.parent.replaceChild(img, el);
+				      } else {
+				        el.src = src;
+								removeClass(el, "lazyLoading");
+								el.className += " lazyLoaded";
+								remove(images, el);
+							}
+
+				      fn? fn() : null;
+				    }
+				    img.src = src;
+						el.className += " lazyLoading";
+					}
 			  }
 
 			  function elementInViewport(el) {
@@ -425,6 +432,24 @@
 
 			    processScroll();
 			    addEventListener('scroll',processScroll);
+
+					function hasClass(el, cls) {
+				    return (' ' + el.className + ' ').indexOf(' ' + cls + ' ') > -1;
+					}
+
+					function removeClass(el, cls) {
+		        if(hasClass(el, cls)) {
+	            var reg = new RegExp('(\\s|^)'+cls+'(\\s|$)');
+	            el.className = el.className.replace(reg,' ');
+		        }
+			    }
+
+					function remove(array, element) {
+				    const index = array.indexOf(element);
+				    if (index !== -1) {
+				        array.splice(index, 1);
+				    }
+					}
 
 			});
 
