@@ -130,44 +130,6 @@ body {
   }
 }
 
-img {
-
-  &.lazy {
-    position: relative;
-
-    &:after {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate3d(-50%, -50%, 0);
-      backface-visibility: hidden;
-      content: '';
-      opacity: 0;
-      transition: 660ms opacity cubic-bezier(.165, .84, .44, 1);
-      will-change: opacity;
-
-      &.show {
-        opacity: 1;
-      }
-
-      span {
-        display: block;
-        width: 40px;
-        height: 40px;
-        border: 4px solid rgba(255,255,255,.4); /* Light grey */
-        border-top: 4px solid white; /* Blue */
-        border-radius: 50%;
-        animation: spin 2s linear infinite;
-
-        @keyframes spin {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-      }
-    }
-  }
-}
-
 .title-fade {
   backface-visibility: hidden;
   opacity: 0;
