@@ -20,10 +20,14 @@
 						<?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
 							<figure class="project slide" data-index="<?php echo $count++; ?>">
 								<a href="<?php the_permalink(); ?>">
-									<picture>
-										<?php $image = get_field( "home_feature_slider_image" ); ?>
-									  <img draggable="false" data-flickity-lazyload="<?php echo $image['sizes']['large']; ?>">
-									</picture>
+									<?php $image = get_field( "home_feature_slider_image" ); ?>
+									<img
+										draggable="false"
+										alt=""
+										src="<?php echo wp_get_attachment_image_src($image, 'micro')[0]; ?>"
+										sizes="auto"
+										data-srcset="<?php echo wp_get_attachment_image_srcset($image, 'large'); ?>"
+										class="lazyload blur-up" />
 									<div class="title">
 										<p><?php the_title(); ?></p>
 									</div>
@@ -117,12 +121,13 @@
 								<?php $image = get_field('home_grid_landscape'); ?>
 									<figure>
 										<a href="<?php the_permalink(); ?>">
-											<picture>
-											  <img
-													class="lazy"
-													data-src="<?php echo $image['sizes']['thumb_landscape']; ?>"
-													src="<?php echo $image['sizes']['thumb_landscape_micro']; ?>">
-											</picture>
+											<img
+												draggable="false"
+												alt=""
+												src="<?php echo wp_get_attachment_image_src($image, 'thumb_landscape_micro')[0]; ?>"
+												sizes="auto"
+												data-srcset="<?php echo wp_get_attachment_image_srcset($image, 'thumb_landscape'); ?>"
+												class="lazyload blur-up" />
 											<div class="title">
 												<p><?php the_title(); ?></p>
 											</div>
@@ -132,12 +137,13 @@
 									<?php $image = get_field('home_grid_landscape'); ?>
 									<figure>
 										<a href="<?php the_permalink(); ?>">
-											<picture>
-											  <img
-													class="lazy"
-													data-src="<?php echo $image['sizes']['thumb_square']; ?>"
-													src="<?php echo $image['sizes']['thumb_square_micro']; ?>">
-											</picture>
+											<img
+												draggable="false"
+												alt=""
+												src="<?php echo wp_get_attachment_image_src($image, 'thumb_square_micro')[0]; ?>"
+												sizes="auto"
+												data-srcset="<?php echo wp_get_attachment_image_srcset($image, 'thumb_square'); ?>"
+												class="lazyload blur-up" />
 											<div class="title">
 												<p><?php the_title(); ?></p>
 											</div>
@@ -147,12 +153,13 @@
 									<?php $image = get_field('home_grid_portrait'); ?>
 									<figure>
 										<a href="<?php the_permalink(); ?>">
-											<picture>
-											  <img
-													class="lazy"
-													data-src="<?php echo $image['sizes']['thumb_portrait']; ?>"
-													src="<?php echo $image['sizes']['thumb_portrait_micro']; ?>">
-											</picture>
+											<img
+												draggable="false"
+												alt=""
+												src="<?php echo wp_get_attachment_image_src($image, 'thumb_portrait_micro')[0]; ?>"
+												sizes="auto"
+												data-srcset="<?php echo wp_get_attachment_image_srcset($image, 'thumb_portrait'); ?>"
+												class="lazyload blur-up" />
 											<div class="title">
 												<p><?php the_title(); ?></p>
 											</div>
@@ -203,7 +210,7 @@
 			 var init = function(time) {
 				 initCarousel();
 				 initMasonry();
-				 initScroll();
+				 // initScroll();
  				 animate();
  				}
 
@@ -223,7 +230,7 @@
  						friction: 1,
  						groupCells: false,
  						initialIndex: 1,
- 						lazyLoad: 1,
+ 						lazyLoad: false,
  						percentPosition: true,
  						prevNextButtons: false,
  						pageDots: true,

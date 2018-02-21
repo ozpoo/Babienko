@@ -43,6 +43,11 @@ function header_scripts() {
         array('jquery'), '1.0.0');
       wp_enqueue_script('flickity');
 
+      wp_register_script('lazysizes',
+        get_template_directory_uri() . '/assets/js/_lib/lazysizes/lazysizes.min.js',
+        array(), '1.0.0');
+      wp_enqueue_script('lazysizes');
+
       wp_register_script('masonry',
         get_template_directory_uri() . '/assets/js/_lib/masonry-master/dist/masonry.pkgd.min.js',
         array('jquery'), '1.0.0');
@@ -223,7 +228,7 @@ function my_acf_admin_head() {
 add_action('acf/input/admin_head', 'my_acf_admin_head');
 
 function RemoveAddMediaButtons(){
-    remove_action( 'media_buttons', 'media_buttons' );
+  remove_action( 'media_buttons', 'media_buttons' );
 }
 add_action('admin_head', 'RemoveAddMediaButtons');
 
