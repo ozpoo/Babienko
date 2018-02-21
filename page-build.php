@@ -194,6 +194,8 @@
 
 			$(function () {
 
+				var images, query;
+
 				$(window).load(function() {
 					init();
 				});
@@ -201,6 +203,7 @@
 			 var init = function(time) {
 				 initCarousel();
 				 initMasonry();
+				 initScroll();
  				 animate();
  				}
 
@@ -261,52 +264,6 @@
  							flky.next();
  						}
  			    });
-
-					 // Set varialbes
-					//  var $carousel, $threshold, $slideWidth, $dragStart, $dragEnd;
-					//  $carousel = $('.carousel');
-					//  $threshold = 150;
-					//  $slideWidth = $(".slide").innerWidth();
-					//
-					// $('.next button').click(function(){ shiftSlide(-1) });
-					// $('.prev button').click(function(){ shiftSlide(1) });
-					//
-					// $(document).on("click", ".left a", function(ev){
-					// 	ev.preventDefault();
-					// 	shiftSlide(1);
-					// });
-					//
-					// $(document).on("click", ".right a", function(ev){
-					// 	ev.preventDefault();
-					// 	shiftSlide(-1);
-					// });
-					//
-					// $('.slide').eq(0).addClass("left");
-					// $('.slide').eq(2).addClass("right");
-					//
-					// // Set responsive slide width
-					// $(window).resize(function() {
-					// 	$slideWidth = $(".slide").innerWidth();
-					// });
-					//
-					// function shiftSlide(direction) {
-					//   if ($carousel.hasClass('transition')) return;
-					//   $dragEnd = $dragStart;
-					//   $carousel.addClass('transition').css('transform','translateX(' + (direction * $slideWidth) + 'px)');
-					//   setTimeout(function(){
-					//     if (direction === 1) {
-					//       $('.slide:first').before($('.slide:last'));
-					//     } else if (direction === -1) {
-					//       $('.slide:last').after($('.slide:first'));
-					//     }
-					//     $carousel.removeClass('transition')
-					// 		$carousel.css('transform','translateX(0px)');
-					// 		$('.slide').removeClass("left");
-					// 		$('.slide').removeClass("right");
-					// 		$('.slide').eq(0).addClass("left");
-					// 		$('.slide').eq(2).addClass("right");
-					//   }, 880);
-					// }
 				}
 
 				var initMasonry = function() {
@@ -321,6 +278,26 @@
 					  $grid.masonry('layout');
 					});
 				}
+				var initScroll = function() {
+					images = [];
+ 					query = $q('img.lazy');
+ 				 // Array.prototype.slice.call is not callable under our lovely IE8
+ 				 for (var i = 0; i < query.length; i++) {
+ 					 images.push(query[i]);
+ 				 };
+ 				 processScroll();
+ 				 addEventListener('scroll',processScroll);
+				}
+
+				var processScroll = function(){
+					for (var i = 0; i < images.length; i++) {
+						if (elementInViewport(images[i])) {
+							loadImage(images[i], function () {
+								images.splice(i, i);
+							});
+						}
+					};
+				};
 
 				var animate = function(time) {
 					var $scrollTop;
@@ -333,17 +310,6 @@
 						$(".sub-menu-left, .sub-menu-right").removeClass("show");
 					}
 				}
-
-				var requestAnimationFrame = (function(){
-				 return  window.requestAnimationFrame       ||
-								 window.webkitRequestAnimationFrame ||
-								 window.mozRequestAnimationFrame    ||
-								 window.oRequestAnimationFrame      ||
-								 window.msRequestAnimationFrame     ||
-								 function(callback, element){
-										 window.setTimeout(callback, 1000 / 60);
-								 };
-				 })();
 
 			  var $q = function(q, res){
 			        if (document.querySelectorAll) {
@@ -404,43 +370,34 @@
 			    )
 			  }
 
-			    var images = new Array()
-			      , query = $q('img.lazy')
-			      , processScroll = function(){
-			          for (var i = 0; i < images.length; i++) {
-			            if (elementInViewport(images[i])) {
-			              loadImage(images[i], function () {
-			                images.splice(i, i);
-			              });
-			            }
-			          };
-			        }
-			      ;
-			    // Array.prototype.slice.call is not callable under our lovely IE8
-			    for (var i = 0; i < query.length; i++) {
-			      images.push(query[i]);
-			    };
+				function hasClass(el, cls) {
+			    return (' ' + el.className + ' ').indexOf(' ' + cls + ' ') > -1;
+				}
 
-			    processScroll();
-			    addEventListener('scroll',processScroll);
+				function removeClass(el, cls) {
+	        if(hasClass(el, cls)) {
+            var reg = new RegExp('(\\s|^)'+cls+'(\\s|$)');
+            el.className = el.className.replace(reg,' ');
+	        }
+		    }
 
-					function hasClass(el, cls) {
-				    return (' ' + el.className + ' ').indexOf(' ' + cls + ' ') > -1;
-					}
-
-					function removeClass(el, cls) {
-		        if(hasClass(el, cls)) {
-	            var reg = new RegExp('(\\s|^)'+cls+'(\\s|$)');
-	            el.className = el.className.replace(reg,' ');
-		        }
+				function remove(array, element) {
+			    const index = array.indexOf(element);
+			    if (index !== -1) {
+			        array.splice(index, 1);
 			    }
+				}
 
-					function remove(array, element) {
-				    const index = array.indexOf(element);
-				    if (index !== -1) {
-				        array.splice(index, 1);
-				    }
-					}
+				var requestAnimationFrame = (function(){
+				 return  window.requestAnimationFrame       ||
+								 window.webkitRequestAnimationFrame ||
+								 window.mozRequestAnimationFrame    ||
+								 window.oRequestAnimationFrame      ||
+								 window.msRequestAnimationFrame     ||
+								 function(callback, element){
+										 window.setTimeout(callback, 1000 / 60);
+								 };
+				 })();
 
 			});
 

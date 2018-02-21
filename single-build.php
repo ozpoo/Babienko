@@ -184,24 +184,47 @@
 
 			$(function () {
 
-				var $scrollTop;
+				var $scrollTop, images, query;
 
 				$(window).load(function(){
 					init();
 				});
 
-				var requestAnimationFrame = (function(){
-				 return  window.requestAnimationFrame       ||
-								 window.webkitRequestAnimationFrame ||
-								 window.mozRequestAnimationFrame    ||
-								 window.oRequestAnimationFrame      ||
-								 window.msRequestAnimationFrame     ||
-								 function(callback, element){
-										 window.setTimeout(callback, 1000 / 60);
-								 };
-				 })();
-
 				var init = function(time) {
+					setListeners();
+					initScroll();
+					reveal();
+					animate();
+				}
+
+				var reveal = function() {
+					setTimeout(function(){
+						$(".intro img").addClass("color");
+					}, 2660);
+				}
+
+				var initScroll = function() {
+					images = [];
+					query = $q('img.lazy');
+					// Array.prototype.slice.call is not callable under our lovely IE8
+					for (var i = 0; i < query.length; i++) {
+						images.push(query[i]);
+					};
+					processScroll();
+					addEventListener('scroll',processScroll);
+				}
+
+				var processScroll = function(){
+					for (var i = 0; i < images.length; i++) {
+						if (elementInViewport(images[i])) {
+							loadImage(images[i], function () {
+								images.splice(i, i);
+							});
+						}
+					};
+				};
+
+				var setListeners = function() {
 					$(".description-toggle button").on("click", function() {
 						$(".description").toggleClass("show");
 					});
@@ -212,13 +235,7 @@
 					$('.modal-close').click(function(){
 						$(".share").removeClass("show");
 					});
-
-					setTimeout(function(){
-						$(".intro img").addClass("color");
-					}, 2660);
-
-					animate();
-				}
+				};
 
 				var animate = function(time) {
 					requestAnimationFrame( animate );
@@ -230,56 +247,53 @@
 					} else {
 						$(".sub-menu, .sub-menu-left, .sub-menu-middle, .sub-menu-right").removeClass("show");
 					}
-				}
+				};
 
 				var $q = function(q, res){
-			        if (document.querySelectorAll) {
-			          res = document.querySelectorAll(q);
-			        } else {
-			          var d=document
-			            , a=d.styleSheets[0] || d.createStyleSheet();
-			          a.addRule(q,'f:b');
-			          for(var l=d.all,b=0,c=[],f=l.length;b<f;b++)
-			            l[b].currentStyle.f && c.push(l[b]);
+		        if (document.querySelectorAll) {
+		          res = document.querySelectorAll(q);
+		        } else {
+		          var d=document
+		            , a=d.styleSheets[0] || d.createStyleSheet();
+		          a.addRule(q,'f:b');
+		          for(var l=d.all,b=0,c=[],f=l.length;b<f;b++)
+		            l[b].currentStyle.f && c.push(l[b]);
 
-			          a.removeRule(0);
-			          res = c;
-			        }
-			        return res;
-			      }
-			    , addEventListener = function(evt, fn){
-			        window.addEventListener
-			          ? this.addEventListener(evt, fn, false)
-			          : (window.attachEvent)
-			            ? this.attachEvent('on' + evt, fn)
-			            : this['on' + evt] = fn;
-			      }
-			    , _has = function(obj, key) {
-			        return Object.prototype.hasOwnProperty.call(obj, key);
-			      }
-			    ;
+		          a.removeRule(0);
+		          res = c;
+		        }
+		        return res;
+		      }, addEventListener = function(evt, fn){
+		        window.addEventListener
+		          ? this.addEventListener(evt, fn, false)
+		          : (window.attachEvent)
+		            ? this.attachEvent('on' + evt, fn)
+		            : this['on' + evt] = fn;
+		      }, _has = function(obj, key) {
+		        return Object.prototype.hasOwnProperty.call(obj, key);
+		      };
 
-					function loadImage (el, fn) {
-						if(!hasClass(el, "lazyLoading")) {
-					    var img = new Image();
-					    var src = el.getAttribute('data-src');
+				function loadImage (el, fn) {
+					if(!hasClass(el, "lazyLoading")) {
+				    var img = new Image();
+				    var src = el.getAttribute('data-src');
 
-					    img.onload = function() {
-					      if (!! el.parent) {
-					        el.parent.replaceChild(img, el);
-					      } else {
-					        el.src = src;
-									removeClass(el, "lazyLoading");
-									el.className += " lazyLoaded";
-									remove(images, el);
-								}
+				    img.onload = function() {
+				      if (!! el.parent) {
+				        el.parent.replaceChild(img, el);
+				      } else {
+				        el.src = src;
+								removeClass(el, "lazyLoading");
+								el.className += " lazyLoaded";
+								remove(images, el);
+							}
 
-					      fn? fn() : null;
-					    }
-					    img.src = src;
-							el.className += " lazyLoading";
-						}
-				  }
+				      fn? fn() : null;
+				    }
+				    img.src = src;
+						el.className += " lazyLoading";
+					}
+			  };
 
 				  function elementInViewport(el) {
 				    var rect = el.getBoundingClientRect()
@@ -291,43 +305,34 @@
 				    )
 				  }
 
-				    var images = new Array()
-				      , query = $q('img.lazy')
-				      , processScroll = function(){
-				          for (var i = 0; i < images.length; i++) {
-				            if (elementInViewport(images[i])) {
-				              loadImage(images[i], function () {
-				                images.splice(i, i);
-				              });
-				            }
-				          };
-				        }
-				      ;
-				    // Array.prototype.slice.call is not callable under our lovely IE8
-				    for (var i = 0; i < query.length; i++) {
-				      images.push(query[i]);
-				    };
+				function hasClass(el, cls) {
+			    return (' ' + el.className + ' ').indexOf(' ' + cls + ' ') > -1;
+				}
 
-				    processScroll();
-				    addEventListener('scroll',processScroll);
+				function removeClass(el, cls) {
+	        if(hasClass(el, cls)) {
+            var reg = new RegExp('(\\s|^)'+cls+'(\\s|$)');
+            el.className = el.className.replace(reg,' ');
+	        }
+		    }
 
-						function hasClass(el, cls) {
-					    return (' ' + el.className + ' ').indexOf(' ' + cls + ' ') > -1;
-						}
+				function remove(array, element) {
+			    const index = array.indexOf(element);
+			    if (index !== -1) {
+		        array.splice(index, 1);
+			    }
+				}
 
-						function removeClass(el, cls) {
-			        if(hasClass(el, cls)) {
-		            var reg = new RegExp('(\\s|^)'+cls+'(\\s|$)');
-		            el.className = el.className.replace(reg,' ');
-			        }
-				    }
-
-						function remove(array, element) {
-					    const index = array.indexOf(element);
-					    if (index !== -1) {
-				        array.splice(index, 1);
-					    }
-						}
+				var requestAnimationFrame = (function(){
+				 return  window.requestAnimationFrame       ||
+								 window.webkitRequestAnimationFrame ||
+								 window.mozRequestAnimationFrame    ||
+								 window.oRequestAnimationFrame      ||
+								 window.msRequestAnimationFrame     ||
+								 function(callback, element){
+										 window.setTimeout(callback, 1000 / 60);
+								 };
+				 })();
 
 			});
 
