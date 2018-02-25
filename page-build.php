@@ -150,7 +150,12 @@
 										</a>
 									</figure>
 								<?php elseif(($count+2) % 3 == 0): ?>
-									<?php $image = get_field('home_grid_portrait'); ?>
+									<?php
+										$image = get_field('home_grid_portrait');
+										if(!$image):
+											$image = get_field('home_grid_landscape');
+										endif;
+									?>
 									<figure>
 										<a href="<?php the_permalink(); ?>">
 											<img

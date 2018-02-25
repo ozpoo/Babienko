@@ -28,7 +28,12 @@
 
 					<figure>
 						<picture>
-							<?php $image = get_field( "single_project_hero" ); ?>
+							<?php
+								$image = get_field( "single_project_hero" );
+								if(!$image):
+									$image = get_field('home_grid_landscape');
+								endif;
+							?>
 							<img
 								draggable="false"
 								alt=""
