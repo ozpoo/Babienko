@@ -29,9 +29,13 @@
 					<figure>
 						<picture>
 							<?php $image = get_field( "single_project_hero" ); ?>
-						  <source media="(min-width: 1800px)" srcset="<?php echo $image['sizes']['large']; ?>">
-							<source media="(min-width: 600px)" srcset="<?php echo $image['sizes']['medium']; ?>">
-						  <img src="<?php echo $image['sizes']['small']; ?>">
+							<img
+								draggable="false"
+								alt=""
+								src="<?php echo wp_get_attachment_image_src($image, 'micro')[0]; ?>"
+								sizes="auto"
+								data-srcset="<?php echo wp_get_attachment_image_srcset($image, 'full'); ?>"
+								class="lazyload blur-up" />
 						</picture>
 					</figure>
 				</section>
