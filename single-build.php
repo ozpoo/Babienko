@@ -75,9 +75,9 @@
 						<img
 							draggable="false"
 							alt=""
-							src="<?php echo wp_get_attachment_image_src($image, 'micro')[0]; ?>"
+							src="<?php echo wp_get_attachment_image_src($image, 'small')[0]; ?>"
 							sizes="auto"
-							data-srcset="<?php echo wp_get_attachment_image_srcset($image, 'full'); ?>"
+							data-srcset="<?php echo wp_get_attachment_image_srcset($image, 'large'); ?>"
 							class="lazyload blur-up" />
 					</figure>
 				</section>
