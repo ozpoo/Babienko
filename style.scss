@@ -119,6 +119,26 @@ body {
   line-height: 1.4;
 }
 
+footer {
+  position: relative;
+  background: $grey;
+  text-align: center;
+  z-index: 1000;
+
+  p {
+    margin: 0;
+    padding: $unit-2;
+  }
+
+  a {
+    border-bottom: 1px solid $black;
+
+    &:hover {
+      border-bottom-color: $red;
+    }
+  }
+}
+
 .fade-wrap {
   backface-visibility: hidden;
   opacity: 0;

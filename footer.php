@@ -1,4 +1,6 @@
-			<footer class="footer"></footer>
+			<footer class="footer">
+				<p>Designed &amp; Developed by <a href="http://www.ericandren.com" target="_blank">Eric Andren</a>.</p>
+			</footer>
 		</section>
 		<?php wp_footer(); ?>
 
