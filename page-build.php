@@ -234,7 +234,7 @@
  						selectedAttraction: 0.1,
  						friction: 1,
  						groupCells: false,
- 						initialIndex: 1,
+ 						initialIndex: 0,
  						lazyLoad: false,
  						percentPosition: true,
  						prevNextButtons: false,

@@ -1,7 +1,7 @@
 {
-  "name": "barchurch",
+  "name": "babienko",
   "version": "1.0.0",
-  "description": "Theme for barchurch",
+  "description": "Theme for Babienko",
   "main": "index.php",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -25,9 +25,9 @@
     "gulp-sourcemaps": "^2.6.1",
     "gulp-uglify": "^3.0.0",
     "jshint": "^2.9.5",
+    "jshint-stylish": "^2.2.1",
     "postcss-scss": "^1.0.2"
   },
   "dependencies": {
-    "isotope-layout": "^3.0.4"
   }
 }
