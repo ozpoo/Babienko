@@ -150,7 +150,7 @@
 					<ul>
 						<li><a href="<?php echo site_url( '/', 'http' ); ?>" <?php if(is_front_page()){ echo 'class="current"'; } ?>>build</a></li>
 						<li><a href="<?php echo site_url( '/about', 'http' ); ?>" <?php if(is_page("about")){ echo 'class="current"'; } ?>>about</a></li>
-						<li><a href="<?php echo site_url( '/roster', 'http' ); ?>" <?php if(is_page("roster")){ echo 'class="current"'; } ?>>roster</a></li>
+						<li><a href="<?php echo site_url( '/roster', 'http' ); ?>" <?php if(is_post_type_archive("roster")){ echo 'class="current"'; } ?>>roster</a></li>
 						<li><a href="<?php echo site_url( '/connect', 'http' ); ?>" <?php if(is_page("connect")){ echo 'class="current"'; } ?>>connect</a></li>
 					</ul>
 				</nav>
