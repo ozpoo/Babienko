@@ -232,4 +232,10 @@ function RemoveAddMediaButtons(){
 }
 add_action('admin_head', 'RemoveAddMediaButtons');
 
+function alx_embed_html( $html ) {
+    return '<div class="video-container">' . $html . '</div>';
+}
+
+add_filter( 'embed_oembed_html', 'alx_embed_html', 10, 3 );
+
 ?>

@@ -68,13 +68,31 @@
 							</picture>
 						</p>
 						<?php if(get_field("url")): ?>
-							<p><small><a target="_blank" href="<?php echo get_field("url"); ?>" class="more-toggle">view now</button></small></a></p>
-						<?php else: ?>
-							<p><small><button class="more-toggle">read more</button></small></p>
-						<?php endif; ?>
-						<div class="more">
-							<?php echo $content; ?>
+							<p><small><a target="_blank" href="<?php echo get_field("url"); ?>" class="more-toggle">view</button></small></a></p>
+						<?php elseif($content): ?>
+							<p><small><button class="more-toggle">view</button></small></p>
+							<div class="more">
+								<?php echo apply_filters('the_content', $content); ?>
+							</div>
+					<?php elseif(get_field("embed")): ?>
+						<p><small><button class="image-toggle">view</button></small></p>
+						<?php $embed = get_field("embed"); ?>
+						<div class="image-modal">
+							<div class="close"><p><button>close</button></p></div>
+							<?php echo apply_filters('the_content', $embed); ?>
 						</div>
+						<?php elseif(get_field("image")): ?>
+							<p><small><button class="image-toggle">view</button></small></p>
+							<?php $image = get_field("image"); ?>
+							<div class="image-modal">
+								<div class="close"><p><button>close</button></p></div>
+								<picture>
+									<source media="(min-width: 1000px)" srcset="<?php echo $image['sizes']['large']; ?>">
+									<source media="(min-width: 600px)" srcset="<?php echo $image['sizes']['medium']; ?>">
+									<img src="<?php echo $image['sizes']['medium']; ?>">
+								</picture>
+							</div>
+						<?php endif; ?>
 					</div>
 				<?php endwhile; endif; ?>
 			</section>
@@ -109,6 +127,14 @@
 				var init = function(time) {
 					$("button.more-toggle").on("click", function() {
 						$(this).closest(".news-post").find(".more").slideToggle();
+					});
+
+					$("button.image-toggle").on("click", function() {
+						$(this).closest(".news-post").find(".image-modal").addClass("show");
+					});
+
+					$(".image-modal").on("click", function() {
+						$(this).removeClass("show");
 					});
 
 					animate();
