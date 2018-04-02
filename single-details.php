@@ -59,6 +59,7 @@
 							'post_type' => 'build',
 							'posts_per_page' => -1
 						);
+						$filter = "?filter=" . $_GET['filter'];
 					} else {
 						$args = array(
 					    'orderby'  => 'menu_order',
