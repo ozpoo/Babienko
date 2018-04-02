@@ -88,7 +88,6 @@
 					if (isset($_GET['filter'])) {
 						$cat = get_the_category();
 						$current_cat_id = $cat[0]->cat_ID; // current category ID
-						echo $current_cat_id;
 						$args = array(
 					    'category' => $current_cat_id,
 					    'orderby'  => 'menu_order',
