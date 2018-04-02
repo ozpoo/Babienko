@@ -116,7 +116,7 @@
 					<?php $count = 0; ?>
 					<?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
 						<?php $categories = get_the_category(); ?>
-						<div class="grid-item all <?php echo strtolower(esc_html( $categories[0]->name )); ?>">
+						<div class="grid-item single-build all <?php echo strtolower(esc_html( $categories[0]->name )); ?>">
 							<?php if($count % 3 == 0): ?>
 								<?php $image = get_field('home_grid_landscape'); ?>
 									<figure>
@@ -206,7 +206,7 @@
 
 			$(function () {
 
-				var images, query;
+				var images, query, currentFilter;
 
 				$(window).load(function() {
 					init();
@@ -246,7 +246,7 @@
  						wrapAround: true
  					});
 
- 					$(".project a").on("click", function(ev){
+ 					$(".project a").on("click", function(ev) {
  		        ev.preventDefault();
  						var el = $(this).closest(".project");
  						var projects = $(".project ");
@@ -280,14 +280,37 @@
 
 				var initMasonry = function() {
 					// Init masonry grid and reload on imagesLoaded
+					currentFilter = "";
 					var $grid;
 					$grid = $('.grid').filterMasonry({
 					  itemSelector: '.grid-item',
 						filtersGroupSelector:'.filters',
 					  percentPosition: true,
 					});
+
 					$grid.imagesLoaded().progress( function() {
 					  $grid.masonry('layout');
+					});
+
+					$( ".filters input" ).change(function() {
+						var newFilter = $(this).val();
+						if(newFilter == "all") {
+							$(".single-build a").each(function() {
+								var newUrl = $(this).attr("href").replace("?filter=" + currentFilter, "");
+								$(this).attr("href", newUrl);
+							});
+						} else {
+							$(".single-build a").each(function() {
+								if(~$(this).attr("href").indexOf("?filter=")) {
+									var newUrl = $(this).attr("href").replace("?filter=" + currentFilter, "?filter=" + newFilter);
+								} else {
+									var newUrl = $(this).attr("href") + "?filter=" + newFilter;
+								}
+								$(this).attr("href", newUrl);
+							});
+						}
+						currentFilter = newFilter;
+						console.log(currentFilter);
 					});
 				}
 				var initScroll = function() {

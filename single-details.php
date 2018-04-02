@@ -46,23 +46,44 @@
 				</section>
 
 				<?php
-					if(get_adjacent_post(false, '', true )){
-							$nextPost = get_adjacent_post(false, '', true );
-							$nextPost = get_the_permalink( $nextPost->ID );
+					// if filter parameter is set get next an previous posts with the same category
+					$post_id = $post->ID; // current post ID
+					if (isset($_GET['filter'])) {
+						$cat = get_the_category();
+						$current_cat_id = $cat[0]->cat_ID; // current category ID
+						echo $current_cat_id;
+						$args = array(
+					    'category' => $current_cat_id,
+					    'orderby'  => 'menu_order',
+					    'order'    => 'DESC',
+							'post_type' => 'build',
+							'posts_per_page' => -1
+						);
 					} else {
-							$nextPost = new WP_Query('posts_per_page=1&order=ASC&post_type=work&orderby=menu_order');
-							$nextPost->the_post();
-							$nextPost = get_the_permalink( $nextPost->ID );
-							wp_reset_query();
+						$args = array(
+					    'orderby'  => 'menu_order',
+					    'order'    => 'DESC',
+							'post_type' => 'build',
+							'posts_per_page' => -1
+						);
 					}
-					if(get_adjacent_post(false, '', false )){
-							$prevPost = get_adjacent_post(false, '', false );
-							$prevPost = get_the_permalink( $prevPost->ID );
-					} else {
-						$prevPost = new WP_Query('posts_per_page=1&order=DESC&post_type=work&orderby=menu_order');
-						$prevPost->the_post();
-						$prevPost = get_the_permalink( $prevPost->ID );
-						wp_reset_query();
+
+					$posts = get_posts( $args );
+					// get IDs of posts retrieved from get_posts
+					$ids = array();
+					foreach ( $posts as $thepost ) {
+				    $ids[] = $thepost->ID;
+					}
+					// get and echo previous and next post in the same category
+					$thisindex = array_search( $post_id, $ids );
+					$previd    = isset( $ids[ $thisindex - 1 ] ) ? $ids[ $thisindex - 1 ] : $ids[ count($ids)-1 ];
+					$nextid    = isset( $ids[ $thisindex + 1 ] ) ? $ids[ $thisindex + 1 ] : $ids[0];
+
+					if ( $previd ) {
+				    $prevPost = get_the_permalink($previd) . $filter;
+					}
+					if ( $nextid ) {
+						$nextPost = get_the_permalink($nextid) . $filter;
 					}
 				?>
 
